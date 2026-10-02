@@ -81,22 +81,29 @@ body {
   font-weight: 400;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+/* Element defaults live in the base layer so Tailwind utility classes can override them */
+@layer base {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: color 0.3s ease;
-}
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

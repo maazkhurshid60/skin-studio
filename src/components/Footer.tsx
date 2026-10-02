@@ -37,7 +37,7 @@ const treatmentLinks = [
 const otherLinks = [
   { label: "Gift Certificates", href: "/product/gift-card", external: false },
   { label: "Offers", href: "/offers", external: false },
-  { label: "Cancellation Policy", href: "https://skinstudioithaca.com/cancellation-policy/", external: true },
+  { label: "Cancellation Policy", href: "/cancellation-policy", external: false },
 ];
 
 export default function Footer() {

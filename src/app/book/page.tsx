@@ -21,6 +21,7 @@ import {
   CalendarCheck,
   User,
   Calendar,
+  ChevronDown,
   AlertCircle,
   Loader2,
   Mail,
@@ -96,6 +97,298 @@ function getDateString(date: Date): string {
 
 function getDaysInMonth(year: number, month: number): number {
   return new Date(year, month + 1, 0).getDate();
+}
+
+function formatDisplayDate(dateStr: string): string {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  return `${MONTHS[m - 1].slice(0, 3)} ${d}, ${y}`;
+}
+
+// Styled replacement for <input type="date">, whose popup can't be themed
+function DatePicker({
+  value,
+  onChange,
+  min,
+  placeholder = "Select a date",
+  rangeStart,
+  rangeEnd,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  min?: string;
+  placeholder?: string;
+  rangeStart?: string;
+  rangeEnd?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const initial = value || min || getDateString(new Date());
+  const [view, setView] = useState(() => {
+    const [y, m] = initial.split("-").map(Number);
+    return { year: y, month: m - 1 };
+  });
+  const rootRef = useRef<HTMLDivElement>(null);
+  const todayStr = getDateString(new Date());
+
+  useEffect(() => {
+    if (!open) return;
+    function onPointerDown(e: PointerEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  function toggle() {
+    if (!open) {
+      const [y, m] = (value || min || todayStr).split("-").map(Number);
+      setView({ year: y, month: m - 1 });
+    }
+    setOpen((o) => !o);
+  }
+
+  const { year, month } = view;
+  const daysInMonth = getDaysInMonth(year, month);
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < firstDayOfWeek; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+  const minMonth = min ? min.slice(0, 7) : null;
+  const viewMonth = `${year}-${String(month + 1).padStart(2, "0")}`;
+  const canPrev = !minMonth || viewMonth > minMonth;
+
+  function shift(delta: number) {
+    setView((p) => {
+      const m = p.month + delta;
+      if (m < 0) return { year: p.year - 1, month: 11 };
+      if (m > 11) return { year: p.year + 1, month: 0 };
+      return { year: p.year, month: m };
+    });
+  }
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        onClick={toggle}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        className={`flex w-full items-center justify-between rounded-xl border bg-dark-primary px-4 py-3 text-left font-sans text-[14px] transition-colors focus:outline-none ${
+          open ? "border-rose/40" : "border-border-subtle hover:border-rose/25"
+        } ${value ? "text-ivory" : "text-body-muted/50"}`}
+      >
+        {value ? formatDisplayDate(value) : placeholder}
+        <Calendar size={16} className={open ? "text-rose" : "text-body-muted/60"} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="dialog"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease }}
+            className="absolute left-0 top-[calc(100%+8px)] z-30 w-[300px] max-w-[calc(100vw-32px)] rounded-2xl border border-border-subtle bg-dark-secondary p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          >
+            <div className="mb-3 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => canPrev && shift(-1)}
+                disabled={!canPrev}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-body-muted transition-colors hover:bg-rose/10 hover:text-ivory disabled:pointer-events-none disabled:opacity-30"
+                aria-label="Previous month"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <span className="font-sans text-[14px] font-semibold text-ivory">
+                {MONTHS[month]} {year}
+              </span>
+              <button
+                type="button"
+                onClick={() => shift(1)}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-body-muted transition-colors hover:bg-rose/10 hover:text-ivory"
+                aria-label="Next month"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-7 gap-1">
+              {DAYS.map((d) => (
+                <div key={d} className="py-1 text-center font-sans text-[10px] font-medium uppercase tracking-wider text-body-muted/50">
+                  {d.slice(0, 2)}
+                </div>
+              ))}
+              {cells.map((day, i) => {
+                if (day === null) return <div key={`empty-${i}`} />;
+
+                const dateStr = `${viewMonth}-${String(day).padStart(2, "0")}`;
+                const disabled = !!min && dateStr < min;
+                const isSelected = dateStr === value;
+                const isToday = dateStr === todayStr;
+                const inRange =
+                  !!rangeStart && !!rangeEnd && dateStr > rangeStart && dateStr < rangeEnd;
+                const isRangeEdge = dateStr === rangeStart || dateStr === rangeEnd;
+
+                return (
+                  <button
+                    key={dateStr}
+                    type="button"
+                    onClick={() => {
+                      if (disabled) return;
+                      onChange(dateStr);
+                      setOpen(false);
+                    }}
+                    disabled={disabled}
+                    className={`flex h-9 w-full items-center justify-center rounded-lg font-sans text-[13px] transition-all duration-200 ${
+                      isSelected
+                        ? "bg-rose font-semibold text-ivory shadow-[0_2px_12px_rgba(194,90,131,0.3)]"
+                        : disabled
+                          ? "cursor-not-allowed text-body-muted/20"
+                          : isRangeEdge
+                            ? "bg-rose/25 font-semibold text-ivory"
+                            : inRange
+                              ? "bg-rose/10 text-ivory hover:bg-rose/20"
+                              : "text-body-muted hover:bg-rose/10 hover:text-ivory"
+                    } ${isToday && !isSelected && !disabled ? "font-semibold text-rose" : ""}`}
+                  >
+                    {day}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-3 flex items-center justify-between border-t border-border-subtle pt-3">
+              <button
+                type="button"
+                onClick={() => {
+                  onChange("");
+                  setOpen(false);
+                }}
+                className="font-sans text-[12px] font-medium text-body-muted transition-colors hover:text-ivory"
+              >
+                Clear
+              </button>
+              {(!min || todayStr >= min) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onChange(todayStr);
+                    setOpen(false);
+                  }}
+                  className="font-sans text-[12px] font-semibold text-rose transition-colors hover:text-blush"
+                >
+                  Today
+                </button>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Styled replacement for the native <select>, grouped by category
+function ServiceSelect({
+  categories,
+  services,
+  onSelect,
+}: {
+  categories: Category[];
+  services: Service[];
+  onSelect: (service: Service) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function onPointerDown(e: PointerEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className={`flex w-full items-center justify-between rounded-xl border bg-dark-primary px-4 py-3 text-left font-sans text-[14px] text-body-muted/70 transition-colors focus:outline-none ${
+          open ? "border-rose/40" : "border-border-subtle hover:border-rose/25"
+        }`}
+      >
+        Select a service...
+        <ChevronDown
+          size={16}
+          className={`transition-transform duration-300 ${open ? "rotate-180 text-rose" : "text-body-muted/60"}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="listbox"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease }}
+            className="absolute left-0 right-0 top-[calc(100%+8px)] z-30 max-h-[360px] overflow-y-auto overscroll-contain rounded-2xl border border-border-subtle bg-dark-secondary p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          >
+            {categories.map((cat) => {
+              const items = services.filter((s) => s.category_slug === cat.slug);
+              if (items.length === 0) return null;
+              return (
+                <div key={cat.slug} className="mb-1 last:mb-0">
+                  <p className="sticky top-[-8px] z-10 bg-dark-secondary px-3 pb-2 pt-3 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-rose">
+                    {cat.name}
+                  </p>
+                  {items.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      role="option"
+                      aria-selected={false}
+                      onClick={() => {
+                        onSelect(s);
+                        setOpen(false);
+                      }}
+                      className="flex w-full items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-left transition-colors duration-200 hover:bg-rose/10 focus:bg-rose/10 focus:outline-none"
+                    >
+                      <span className="font-sans text-[14px] text-ivory">{s.name}</span>
+                      <span className="flex shrink-0 items-center gap-3 font-sans text-[12px] text-body-muted/70">
+                        <span>{formatDuration(s.duration_minutes)}</span>
+                        <span className="font-semibold text-ivory/90">{formatPrice(s.price_cents)}</span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export default function BookPage() {
@@ -938,30 +1231,14 @@ export default function BookPage() {
                               </div>
                             ) : (
                               <div className="mb-6">
-                                <select
-                                  value=""
-                                  onChange={(e) => {
-                                    const svc = services.find((s) => s.id === Number(e.target.value));
-                                    if (svc) {
-                                      setSelectedService(svc);
-                                      setSelectedProvider(null);
-                                    }
+                                <ServiceSelect
+                                  categories={categories}
+                                  services={services}
+                                  onSelect={(svc) => {
+                                    setSelectedService(svc);
+                                    setSelectedProvider(null);
                                   }}
-                                  className="w-full rounded-xl border border-border-subtle bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory focus:border-rose/40 focus:outline-none"
-                                >
-                                  <option value="" disabled>Select a service...</option>
-                                  {categories.map((cat) => (
-                                    <optgroup key={cat.slug} label={cat.name}>
-                                      {services
-                                        .filter((s) => s.category_slug === cat.slug)
-                                        .map((s) => (
-                                          <option key={s.id} value={s.id}>
-                                            {s.name} — {formatPrice(s.price_cents)}
-                                          </option>
-                                        ))}
-                                    </optgroup>
-                                  ))}
-                                </select>
+                                />
                               </div>
                             )}
 
@@ -1009,15 +1286,16 @@ export default function BookPage() {
                                   <Calendar size={11} className="mr-1 inline" />
                                   Earliest Date
                                 </label>
-                                <input
-                                  type="date"
+                                <DatePicker
                                   value={wlDateStart}
-                                  onChange={(e) => {
-                                    setWlDateStart(e.target.value);
-                                    if (wlDateEnd && e.target.value > wlDateEnd) setWlDateEnd(e.target.value);
+                                  onChange={(v) => {
+                                    setWlDateStart(v);
+                                    if (v && wlDateEnd && v > wlDateEnd) setWlDateEnd(v);
                                   }}
                                   min={todayStr}
-                                  className="w-full rounded-xl border border-border-subtle bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory [color-scheme:dark] focus:border-rose/40 focus:outline-none"
+                                  placeholder="Select earliest date"
+                                  rangeStart={wlDateStart}
+                                  rangeEnd={wlDateEnd}
                                 />
                               </div>
                               <div>
@@ -1025,12 +1303,13 @@ export default function BookPage() {
                                   <Calendar size={11} className="mr-1 inline" />
                                   Latest Date
                                 </label>
-                                <input
-                                  type="date"
+                                <DatePicker
                                   value={wlDateEnd}
-                                  onChange={(e) => setWlDateEnd(e.target.value)}
+                                  onChange={setWlDateEnd}
                                   min={wlDateStart || todayStr}
-                                  className="w-full rounded-xl border border-border-subtle bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory [color-scheme:dark] focus:border-rose/40 focus:outline-none"
+                                  placeholder="Select latest date"
+                                  rangeStart={wlDateStart}
+                                  rangeEnd={wlDateEnd}
                                 />
                               </div>
                             </div>
@@ -1489,9 +1768,7 @@ export default function BookPage() {
                   )}
 
                   <motion.a
-                    href="https://skinstudioithaca.com/cancellation-policy/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/cancellation-policy"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
