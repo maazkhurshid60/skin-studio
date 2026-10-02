@@ -2,7 +2,11 @@ import initSqlJs, { type Database, type BindParams } from "sql.js";
 import fs from "fs";
 import path from "path";
 
-const DB_PATH = path.join(process.cwd(), "data", "booking.db");
+// Vercel's deployment filesystem is read-only; /tmp is the only writable location there.
+// Note: /tmp is per-instance and temporary, so writes made on Vercel do not persist.
+const DB_PATH = process.env.VERCEL
+  ? path.join("/tmp", "data", "booking.db")
+  : path.join(process.cwd(), "data", "booking.db");
 
 let db: Database | null = null;
 
