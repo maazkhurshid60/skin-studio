@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Manrope:wght@400;500;600;700&display=swap');
+
+  @page { size: A4 landscape; margin: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --dark: #1F201D;
+    --dark2: #292A26;
+    --deep: #181916;
+    --ivory: #F4EFE8;
+    --muted: #D6D0C8;
+    --rose: #C25A83;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Manrope', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--deep);
+    color: var(--ivory);
+    font-family: var(--sans);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Cover */
+  .cover {
+    width: 297mm; height: 210mm;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--dark);
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: ''; position: absolute;
+    top: -100px; right: -100px;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(194,90,131,0.08), transparent 70%);
+    border-radius: 50%;
+  }
+  .cover-brand {
+    font-family: var(--serif);
+    font-size: 14px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted); opacity: 0.5;
+    margin-bottom: 40px; position: relative; z-index: 1;
+  }
+  .cover h1 {
+    font-family: var(--serif);
+    font-size: 60px; font-weight: 300; line-height: 1.1;
+    position: relative; z-index: 1;
+  }
+  .cover h1 em { font-style: italic; }
+  .cover-sub {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--rose); margin-top: 14px;
+    position: relative; z-index: 1;
+  }
+  .cover-line {
+    width: 50px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    margin: 32px 0; position: relative; z-index: 1;
+  }
+  .cover-stats {
+    display: flex; gap: 40px;
+    margin-top: 8px; position: relative; z-index: 1;
+  }
+  .stat-val {
+    font-family: var(--serif); font-size: 32px; font-weight: 300;
+  }
+  .stat-lbl {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted); opacity: 0.5; margin-top: 2px;
+  }
+  .cover-foot {
+    position: absolute; bottom: 24px;
+    font-size: 10px; color: rgba(214,208,200,0.2); letter-spacing: 0.1em;
+  }
+
+  /* Sections */
+  .section {
+    page-break-before: always;
+  }
+  .section img {
+    width: 100%;
+    display: block;
+  }
+  .section .dropdown-img {
+    width: 100%;
+    border-bottom: 2px solid var(--rose);
+  }
+  .section .mobile-img {
+    width: 375px;
+    margin: 40px auto;
+    display: block;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  .label-bar {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 28px;
+    background: var(--dark);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .label-bar.accent {
+    border-bottom: 2px solid var(--rose);
+  }
+  .label-num {
+    font-family: var(--serif);
+    font-size: 16px; color: var(--rose); opacity: 0.35;
+  }
+  .label-name {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ivory); opacity: 0.7;
+  }
+
+  /* Interactive header */
+  .interactive-header {
+    page-break-before: always;
+    width: 297mm; height: 210mm;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--dark);
+  }
+  .interactive-header h2 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 300;
+  }
+  .interactive-header h2 em { font-style: italic; }
+  .interactive-header p {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--rose); margin-top: 14px;
+  }
+  .ih-line {
+    width: 40px; height: 1px;
+    background: var(--rose); opacity: 0.4;
+    margin-top: 28px;
+  }
+
+  /* End */
+  .end {
+    page-break-before: always;
+    width: 297mm; height: 210mm;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--dark);
+  }
+  .end-logo {
+    font-family: var(--serif);
+    font-size: 36px; letter-spacing: 0.15em;
+  }
+  .end-tag {
+    font-family: var(--serif); font-style: italic;
+    font-size: 15px; color: var(--muted); opacity: 0.4;
+    margin-top: 8px;
+  }
+  .end-info {
+    font-size: 11px; color: var(--muted); opacity: 0.25;
+    line-height: 2; margin-top: 36px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-brand">Skin Studio Ithaca</div>
+  <h1>Website <em>Redesign</em></h1>
+  <div class="cover-sub">UI Design Showcase</div>
+  <div class="cover-line"></div>
+  <div class="cover-stats">
+    <div><div class="stat-val">13</div><div class="stat-lbl">Pages</div></div>
+    <div><div class="stat-val">5</div><div class="stat-lbl">Services</div></div>
+  </div>
+  <div class="cover-foot">September 2026</div>
+</div>
+
+<!-- Full Page Screenshots -->
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">01</span>
+      <span class="label-name">Home</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/home.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">02</span>
+      <span class="label-name">About</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/about.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">03</span>
+      <span class="label-name">Our Team</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/team.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">04</span>
+      <span class="label-name">Services</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/services.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">05</span>
+      <span class="label-name">Facial Treatments</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/facial-treatments.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">06</span>
+      <span class="label-name">Micro-Infusion Facial</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/micro-infusion.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">07</span>
+      <span class="label-name">Photo Facial / IPL</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ipl-treatments.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">08</span>
+      <span class="label-name">Laser Hair Removal</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/laser-hair-removal.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">09</span>
+      <span class="label-name">Lash Services</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/lash-services.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">10</span>
+      <span class="label-name">Special Offers</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/offers.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">11</span>
+      <span class="label-name">Book Appointment</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/book.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">12</span>
+      <span class="label-name">Gift Certificates</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/gift-card.png" />
+  </div>
+
+  <div class="section">
+    <div class="label-bar">
+      <span class="label-num">13</span>
+      <span class="label-name">Contact</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/contact.png" />
+  </div>
+
+<!-- Interactive States Divider -->
+<div class="interactive-header">
+  <h2>Interactive <em>States</em></h2>
+  <p>Dropdowns · Form Steps · Components</p>
+  <div class="ih-line"></div>
+</div>
+
+<!-- Interactive States -->
+
+  <div class="section interactive">
+    <div class="label-bar accent">
+      <span class="label-name">Navigation — Services Dropdown</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ui-dropdown-services.png" class="dropdown-img" />
+  </div>
+
+  <div class="section interactive">
+    <div class="label-bar accent">
+      <span class="label-name">Navigation — About Us Dropdown</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ui-dropdown-about.png" class="dropdown-img" />
+  </div>
+
+  <div class="section interactive">
+    <div class="label-bar accent">
+      <span class="label-name">Gift Card — Step 2: Gift Details</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ui-giftcard-step2.png" class="" />
+  </div>
+
+  <div class="section interactive">
+    <div class="label-bar accent">
+      <span class="label-name">Gift Card — Step 3: Review</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ui-giftcard-step3.png" class="" />
+  </div>
+
+  <div class="section interactive">
+    <div class="label-bar accent">
+      <span class="label-name">Gift Card — Step 4: Checkout</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ui-giftcard-step4.png" class="" />
+  </div>
+
+  <div class="section interactive">
+    <div class="label-bar accent">
+      <span class="label-name">Mobile Navigation Menu</span>
+    </div>
+    <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/full/ui-mobile-menu.png" class="mobile-img" />
+  </div>
+
+<!-- End -->
+<div class="end">
+  <div class="end-logo">SKIN STUDIO</div>
+  <div class="end-tag">Serious skincare. Serious results.</div>
+  <div class="end-info">
+    903 Hanshaw Rd, Suite 104 · Ithaca, NY 14850<br>
+    607-262-8566<br><br>
+    © 2026 Skin Studio Ithaca
+  </div>
+</div>
+
+</body>
+</html>

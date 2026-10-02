@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Skin Studio Ithaca — UI Design Showcase</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --dark: #1F201D;
+    --dark-secondary: #292A26;
+    --dark-deep: #181916;
+    --ivory: #F4EFE8;
+    --muted: #D6D0C8;
+    --rose: #C25A83;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Manrope', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--dark);
+    color: var(--ivory);
+    font-family: var(--sans);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ─── Cover ─── */
+  .cover {
+    width: 297mm;
+    height: 210mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(160deg, var(--dark-deep) 0%, var(--dark) 40%, var(--dark-secondary) 100%);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(194,90,131,0.1), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cover-logo {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    opacity: 0.6;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ivory);
+    margin-bottom: 12px;
+  }
+
+  .cover-title em { font-style: italic; font-weight: 300; }
+
+  .cover-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 32px;
+  }
+
+  .cover-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    margin-bottom: 28px;
+  }
+
+  .cover-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 420px;
+  }
+
+  .cover-meta {
+    margin-top: 48px;
+    display: flex;
+    gap: 40px;
+  }
+
+  .cover-meta-value {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+  }
+
+  .cover-meta-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.5;
+    margin-top: 2px;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 24px;
+    font-size: 10px;
+    color: rgba(214,208,200,0.25);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── TOC ─── */
+  .toc {
+    width: 297mm;
+    height: 210mm;
+    padding: 48px 56px;
+    background: var(--dark);
+    page-break-after: always;
+  }
+
+  .toc-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 16px;
+  }
+
+  .toc-heading {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .toc-num {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--rose);
+    opacity: 0.4;
+    min-width: 24px;
+  }
+
+  .toc-name {
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .toc-route {
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.35;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ─── Spread (Desktop + Mobile) ─── */
+  .spread {
+    width: 297mm;
+    height: 210mm;
+    display: flex;
+    background: var(--dark-secondary);
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  .spread-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    padding: 36px 28px;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spread-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--rose);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .spread-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 6px;
+  }
+
+  .spread-route {
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    color: var(--muted);
+    opacity: 0.4;
+    margin-bottom: 16px;
+  }
+
+  .spread-divider {
+    width: 28px;
+    height: 1px;
+    background: var(--rose);
+    opacity: 0.4;
+    margin-bottom: 16px;
+  }
+
+  .spread-desc {
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.7;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .spread-viewport {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.4;
+  }
+
+  .viewport-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .desktop-dot { background: #4CAF50; }
+  .mobile-dot { background: #2196F3; }
+
+  /* Browser chrome */
+  .spread-screenshot {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 20px 0;
+    min-width: 0;
+  }
+
+  .browser-chrome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #151613;
+    border-radius: 8px 8px 0 0;
+    padding: 8px 14px;
+    flex-shrink: 0;
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .browser-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .browser-dots span:first-child { background: #ff5f57; }
+  .browser-dots span:nth-child(2) { background: #febc2e; }
+  .browser-dots span:nth-child(3) { background: #28c840; }
+
+  .browser-url {
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    color: var(--muted);
+    opacity: 0.4;
+    background: rgba(255,255,255,0.03);
+    border-radius: 4px;
+    padding: 3px 10px;
+  }
+
+  .screenshot-scroll {
+    flex: 1;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background: var(--dark-deep);
+  }
+
+  .screenshot-scroll img {
+    width: 100%;
+    display: block;
+  }
+
+  /* Mobile layout */
+  .mobile-screenshot-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px 20px 0;
+  }
+
+  .mobile-device {
+    width: 200px;
+    background: #0a0a09;
+    border-radius: 28px;
+    padding: 8px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  .mobile-notch {
+    width: 80px;
+    height: 16px;
+    margin: 0 auto 4px;
+    background: #0a0a09;
+    border-radius: 0 0 12px 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .mobile-screen {
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--dark-deep);
+    max-height: 540px;
+  }
+
+  .mobile-screen img {
+    width: 100%;
+    display: block;
+  }
+
+  /* ─── End ─── */
+  .end-page {
+    width: 297mm;
+    height: 210mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(160deg, var(--dark-deep) 0%, var(--dark) 100%);
+    page-break-after: always;
+  }
+
+  .end-logo {
+    font-family: var(--serif);
+    font-size: 40px;
+    letter-spacing: 0.15em;
+  }
+
+  .end-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+    opacity: 0.5;
+    margin: 8px 0 36px;
+  }
+
+  .end-info {
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.35;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-logo">Skin Studio Ithaca</div>
+  <h1 class="cover-title">Website <em>Redesign</em></h1>
+  <p class="cover-subtitle">UI Design Showcase</p>
+  <div class="cover-line"></div>
+  <p class="cover-desc">
+    A complete visual presentation of the redesigned Skin Studio Ithaca website.
+    Medical-grade skincare meets luxury design — crafted for trust, clarity, and conversion.
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-value">13</div>
+      <div class="cover-meta-label">Pages</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-value">5</div>
+      <div class="cover-meta-label">Service Pages</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-value">26</div>
+      <div class="cover-meta-label">Screenshots</div>
+    </div>
+  </div>
+  <div class="cover-footer">Prepared September 2026</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-label">Table of Contents</div>
+  <h2 class="toc-heading">Pages</h2>
+  <div class="toc-grid">
+    
+    <div class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-name">Home Page</span>
+      <span class="toc-route">/</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-name">About Page</span>
+      <span class="toc-route">/about</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-name">Our Team</span>
+      <span class="toc-route">/team</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-name">Services Overview</span>
+      <span class="toc-route">/services</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-name">Facial Treatments</span>
+      <span class="toc-route">/services/facial-treatments</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-name">Micro-Infusion Facial</span>
+      <span class="toc-route">/services/micro-infusion-facial</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">07</span>
+      <span class="toc-name">Photo Facial / IPL</span>
+      <span class="toc-route">/services/ipl-treatments</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">08</span>
+      <span class="toc-name">Laser Hair Removal</span>
+      <span class="toc-route">/services/laser-hair-removal</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">09</span>
+      <span class="toc-name">Lash Services</span>
+      <span class="toc-route">/services/lash-services</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">10</span>
+      <span class="toc-name">Special Offers</span>
+      <span class="toc-route">/offers</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">11</span>
+      <span class="toc-name">Book Appointment</span>
+      <span class="toc-route">/book</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">12</span>
+      <span class="toc-name">Gift Certificates</span>
+      <span class="toc-route">/product/gift-card</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">13</span>
+      <span class="toc-name">Contact Us</span>
+      <span class="toc-route">/contact</span>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Home Page - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">01</div>
+        <h2 class="spread-title">Home Page</h2>
+        <p class="spread-route">/</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Main landing page — hero, services, before & after results, team showcase, testimonials, and booking CTA.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/home.png" alt="Home Page" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Home Page - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">01</div>
+        <h2 class="spread-title">Home Page</h2>
+        <p class="spread-route">/</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/home.png" alt="Home Page Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- About Page - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">02</div>
+        <h2 class="spread-title">About Page</h2>
+        <p class="spread-route">/about</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Company overview with Skin Studio's story, values, and medical-grade skincare philosophy.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/about</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/about.png" alt="About Page" />
+        </div>
+      </div>
+    </div>
+
+    <!-- About Page - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">02</div>
+        <h2 class="spread-title">About Page</h2>
+        <p class="spread-route">/about</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/about.png" alt="About Page Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Our Team - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">03</div>
+        <h2 class="spread-title">Our Team</h2>
+        <p class="spread-route">/team</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Featured founder section for Natalie Sweeney, team member grid, testimonials, and booking CTA.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/team</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/team.png" alt="Our Team" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Team - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">03</div>
+        <h2 class="spread-title">Our Team</h2>
+        <p class="spread-route">/team</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/team.png" alt="Our Team Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Services Overview - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">04</div>
+        <h2 class="spread-title">Services Overview</h2>
+        <p class="spread-route">/services</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Services index listing all treatments with descriptions and links to detail pages.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/services</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/services.png" alt="Services Overview" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Overview - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">04</div>
+        <h2 class="spread-title">Services Overview</h2>
+        <p class="spread-route">/services</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/services.png" alt="Services Overview Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Facial Treatments - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">05</div>
+        <h2 class="spread-title">Facial Treatments</h2>
+        <p class="spread-route">/services/facial-treatments</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Service detail page for facial treatment options, pricing, and booking.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/services/facial-treatments</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/facial-treatments.png" alt="Facial Treatments" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Facial Treatments - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">05</div>
+        <h2 class="spread-title">Facial Treatments</h2>
+        <p class="spread-route">/services/facial-treatments</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/facial-treatments.png" alt="Facial Treatments Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Micro-Infusion Facial - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">06</div>
+        <h2 class="spread-title">Micro-Infusion Facial</h2>
+        <p class="spread-route">/services/micro-infusion-facial</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Micro-Infusion Facial treatment details, procedure info, and results.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/services/micro-infusion-facial</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/micro-infusion.png" alt="Micro-Infusion Facial" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Micro-Infusion Facial - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">06</div>
+        <h2 class="spread-title">Micro-Infusion Facial</h2>
+        <p class="spread-route">/services/micro-infusion-facial</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/micro-infusion.png" alt="Micro-Infusion Facial Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Photo Facial / IPL - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">07</div>
+        <h2 class="spread-title">Photo Facial / IPL</h2>
+        <p class="spread-route">/services/ipl-treatments</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">IPL photo facial service page with benefits and expected results.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/services/ipl-treatments</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/ipl-treatments.png" alt="Photo Facial / IPL" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo Facial / IPL - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">07</div>
+        <h2 class="spread-title">Photo Facial / IPL</h2>
+        <p class="spread-route">/services/ipl-treatments</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/ipl-treatments.png" alt="Photo Facial / IPL Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Laser Hair Removal - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">08</div>
+        <h2 class="spread-title">Laser Hair Removal</h2>
+        <p class="spread-route">/services/laser-hair-removal</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Laser hair removal with treatment areas, pricing, and consultation.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/services/laser-hair-removal</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/laser-hair-removal.png" alt="Laser Hair Removal" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Laser Hair Removal - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">08</div>
+        <h2 class="spread-title">Laser Hair Removal</h2>
+        <p class="spread-route">/services/laser-hair-removal</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/laser-hair-removal.png" alt="Laser Hair Removal Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lash Services - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">09</div>
+        <h2 class="spread-title">Lash Services</h2>
+        <p class="spread-route">/services/lash-services</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Lash lift and tint service page with details, aftercare, and booking.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/services/lash-services</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/lash-services.png" alt="Lash Services" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Lash Services - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">09</div>
+        <h2 class="spread-title">Lash Services</h2>
+        <p class="spread-route">/services/lash-services</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/lash-services.png" alt="Lash Services Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Special Offers - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">10</div>
+        <h2 class="spread-title">Special Offers</h2>
+        <p class="spread-route">/offers</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Current promotions, special offers, and waitlist signup.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/offers</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/offers.png" alt="Special Offers" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Offers - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">10</div>
+        <h2 class="spread-title">Special Offers</h2>
+        <p class="spread-route">/offers</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/offers.png" alt="Special Offers Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Book Appointment - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">11</div>
+        <h2 class="spread-title">Book Appointment</h2>
+        <p class="spread-route">/book</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Booking page with date selection, service picker, and contact form.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/book</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/book.png" alt="Book Appointment" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Book Appointment - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">11</div>
+        <h2 class="spread-title">Book Appointment</h2>
+        <p class="spread-route">/book</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/book.png" alt="Book Appointment Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gift Certificates - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">12</div>
+        <h2 class="spread-title">Gift Certificates</h2>
+        <p class="spread-route">/product/gift-card</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Multi-step gift card purchase flow — amount, recipient, review, checkout.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/product/gift-card</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/gift-card.png" alt="Gift Certificates" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Gift Certificates - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">12</div>
+        <h2 class="spread-title">Gift Certificates</h2>
+        <p class="spread-route">/product/gift-card</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/gift-card.png" alt="Gift Certificates Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contact Us - Desktop -->
+    <div class="spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">13</div>
+        <h2 class="spread-title">Contact Us</h2>
+        <p class="spread-route">/contact</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Contact information, studio hours, contact form, and location.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot desktop-dot"></span>
+          Desktop — 1440px
+        </div>
+      </div>
+      <div class="spread-screenshot">
+        <div class="browser-chrome">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">localhost:3001/contact</div>
+        </div>
+        <div class="screenshot-scroll">
+          <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/desktop/contact.png" alt="Contact Us" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Us - Mobile -->
+    <div class="spread mobile-spread">
+      <div class="spread-sidebar">
+        <div class="spread-num">13</div>
+        <h2 class="spread-title">Contact Us</h2>
+        <p class="spread-route">/contact</p>
+        <div class="spread-divider"></div>
+        <p class="spread-desc">Responsive mobile layout at 375px viewport width.</p>
+        <div class="spread-viewport">
+          <span class="viewport-dot mobile-dot"></span>
+          Mobile — 375 × 812
+        </div>
+      </div>
+      <div class="spread-screenshot mobile-screenshot-area">
+        <div class="mobile-device">
+          <div class="mobile-notch"></div>
+          <div class="mobile-screen">
+            <img src="file:///C:/temp/ssi/skin-studio-ithaca/screenshots/mobile/contact.png" alt="Contact Us Mobile" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+<!-- End -->
+<div class="end-page">
+  <div class="end-logo">SKIN STUDIO</div>
+  <div class="end-tagline">Serious skincare. Serious results.</div>
+  <div class="end-info">
+    903 Hanshaw Rd, Suite 104 · Ithaca, NY 14850<br>
+    607-262-8566<br><br>
+    Website Redesign UI Showcase · © 2026
+  </div>
+</div>
+
+</body>
+</html>
