@@ -1,4 +1,4 @@
-import initSqlJs, { type Database } from "sql.js";
+import initSqlJs, { type Database, type BindParams } from "sql.js";
 import fs from "fs";
 import path from "path";
 
@@ -307,7 +307,7 @@ export function queryAll<T = Record<string, unknown>>(
   params: unknown[] = [],
 ): T[] {
   const stmt = database.prepare(sql);
-  stmt.bind(params);
+  stmt.bind(params as unknown as BindParams);
 
   const results: T[] = [];
   while (stmt.step()) {
