@@ -782,6 +782,33 @@ export default function BookPage() {
         {/* Booking Section */}
         <section ref={formRef} className="bg-dark-secondary py-20 md:py-28 lg:py-36">
           <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+            {!loading && step === 1 && (
+            <div className="mb-8 flex w-full flex-wrap gap-2 md:mb-10">
+              {categories.map((cat) => {
+                const Icon = iconMap[cat.slug] || Sparkles;
+                const isActive = activeCategory === cat.slug;
+                const count = services.filter((s) => s.category_slug === cat.slug).length;
+                return (
+                  <button
+                    key={cat.slug}
+                    onClick={() => setActiveCategory(cat.slug)}
+                    className={`flex items-center gap-2 rounded-full px-4 py-2.5 font-sans text-[13px] font-medium transition-all duration-300 ${
+                      isActive
+                        ? "bg-rose text-ivory shadow-[0_2px_12px_rgba(194,90,131,0.3)]"
+                        : "border border-border-subtle text-body-muted hover:border-rose/30 hover:text-ivory"
+                    }`}
+                  >
+                    <Icon size={14} />
+                    {cat.name}
+                    <span className={`ml-0.5 text-[11px] ${isActive ? "text-ivory/70" : "text-body-muted/50"}`}>
+                      ({count})
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            )}
+
             <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14">
               {/* Main Content */}
               <div>
@@ -800,31 +827,6 @@ export default function BookPage() {
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.4, ease }}
                       >
-                        <div className="mb-8 flex flex-wrap gap-2 md:mb-10">
-                          {categories.map((cat) => {
-                            const Icon = iconMap[cat.slug] || Sparkles;
-                            const isActive = activeCategory === cat.slug;
-                            const count = services.filter((s) => s.category_slug === cat.slug).length;
-                            return (
-                              <button
-                                key={cat.slug}
-                                onClick={() => setActiveCategory(cat.slug)}
-                                className={`flex items-center gap-2 rounded-full px-4 py-2.5 font-sans text-[13px] font-medium transition-all duration-300 ${
-                                  isActive
-                                    ? "bg-rose text-ivory shadow-[0_2px_12px_rgba(194,90,131,0.3)]"
-                                    : "border border-border-subtle text-body-muted hover:border-rose/30 hover:text-ivory"
-                                }`}
-                              >
-                                <Icon size={14} />
-                                {cat.name}
-                                <span className={`ml-0.5 text-[11px] ${isActive ? "text-ivory/70" : "text-body-muted/50"}`}>
-                                  ({count})
-                                </span>
-                              </button>
-                            );
-                          })}
-                        </div>
-
                         <div className="grid gap-3 sm:grid-cols-2">
                           {filteredServices.map((service, i) => (
                             <motion.div
