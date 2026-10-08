@@ -33,7 +33,7 @@ export default function LashServicesPage() {
         <section className="relative flex min-h-[60vh] items-end overflow-hidden pb-20 pt-32 md:min-h-[50vh] md:pb-24 lg:pb-28">
           <div className="absolute inset-0">
             <img
-              src="/images/service-lash-new.jpg"
+              src="/images/service-lash-v2.jpg"
               alt="Lash services at Skin Studio Ithaca"
               className="absolute inset-0 object-cover"
               style={{ width: "100%", height: "100%" }}

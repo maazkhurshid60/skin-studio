@@ -20,19 +20,34 @@ function useContainerWidth(ref: RefObject<HTMLDivElement | null>) {
 
 const transformations = [
   {
-    treatment: "BBL Photofacial",
-    before: "/images/ba-photofacial-before.jpg",
-    after: "/images/ba-photofacial-after.jpg",
+    treatment: "BBL Photofacial & Pigmentation",
+    before: "/images/ba-photofacial-pigmentation-before.jpg",
+    after: "/images/ba-photofacial-pigmentation-after.jpg",
   },
   {
-    treatment: "Microneedling",
-    before: "/images/ba-microneedling-before.jpg",
-    after: "/images/ba-microneedling-after.jpg",
+    treatment: "Wrinkle Reduction & Texture",
+    before: "/images/ba-wrinkle-reduction-before.jpg",
+    after: "/images/ba-wrinkle-reduction-after.jpg",
   },
   {
-    treatment: "Acne Treatment",
-    before: "/images/ba-acne-before.jpg",
-    after: "/images/ba-acne-after.jpg",
+    treatment: "Melasma & Dark Spot Clearing",
+    before: "/images/ba-melasma-clearing-before.jpg",
+    after: "/images/ba-melasma-clearing-after.jpg",
+  },
+  {
+    treatment: "Eye Area Rejuvenation",
+    before: "/images/ba-eye-rejuvenation-before.jpg",
+    after: "/images/ba-eye-rejuvenation-after.jpg",
+  },
+  {
+    treatment: "Facial Tightening & Pores",
+    before: "/images/ba-facial-tightening-before.jpg",
+    after: "/images/ba-facial-tightening-after.jpg",
+  },
+  {
+    treatment: "Under-Eye & Eyelid Lift",
+    before: "/images/ba-eye-lift-before.jpg",
+    after: "/images/ba-eye-lift-after.jpg",
   },
 ];
 

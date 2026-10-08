@@ -22,8 +22,8 @@ const services = [
     description:
       "A proven way to boost collagen production, tighten skin, reduce fine lines, minimize pores, and resurface skin for a radiant, youthful complexion.",
     tags: ["Collagen Boost", "Fine Lines", "Pore Refining"],
-    image: "/images/service-microfusion.jpg",
-    alt: "Micro-Infusion Facial before and after results",
+    image: "/images/service-microfusion-new.jpg",
+    alt: "Gloved esthetician using a micro-infusion pen on a client's face",
   },
   {
     number: "03",
@@ -32,7 +32,7 @@ const services = [
     description:
       "Intense pulsed light therapy offers skin rejuvenation, lightens brown spots, and removes vascular redness — an ideal treatment for rosacea and sun damage.",
     tags: ["Brown Spots", "Rosacea", "Sun Damage"],
-    image: "/images/service-ipl.jpg",
+    image: "/images/treatment-hydrofacial.jpg",
     alt: "IPL photo facial treatment for skin rejuvenation",
   },
   {
@@ -52,8 +52,8 @@ const services = [
     description:
       "Our lash specialists offer keratin lash lifts for beautifully curled natural lashes and professional lash tints — effortless, everyday beauty that lasts up to 6–8 weeks.",
     tags: ["Lash Lift", "Lash Tint", "Natural Lashes"],
-    image: "/images/service-lash-new.jpg",
-    alt: "Lash lift and tint before and after results",
+    image: "/images/service-lash-v2.jpg",
+    alt: "Close-up of naturally curled eyelashes",
   },
 ];
 

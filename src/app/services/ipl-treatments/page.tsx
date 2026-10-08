@@ -35,7 +35,7 @@ export default function IPLTreatmentsPage() {
         <section className="relative flex min-h-[60vh] items-end overflow-hidden pb-20 pt-32 md:min-h-[50vh] md:pb-24 lg:pb-28">
           <div className="absolute inset-0">
             <img
-              src="/images/service-ipl.jpg"
+              src="/images/treatment-hydrofacial.jpg"
               alt="IPL Photo Facial treatment at Skin Studio Ithaca"
               className="absolute inset-0 object-cover"
               style={{ width: "100%", height: "100%" }}
@@ -95,7 +95,7 @@ export default function IPLTreatmentsPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/service-ipl.jpg"
+                  src="/images/treatment-hydrofacial.jpg"
                   alt="IPL Photofacial treatment for skin rejuvenation"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
@@ -196,7 +196,7 @@ export default function IPLTreatmentsPage() {
                   </span>
                 </div>
                 <img
-                  src="/images/ba-photofacial-before.jpg"
+                  src="/images/ba-photofacial-pigmentation-before.jpg"
                   alt="Skin before BBL Photofacial treatment"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/3" }}
@@ -210,7 +210,7 @@ export default function IPLTreatmentsPage() {
                   </span>
                 </div>
                 <img
-                  src="/images/ba-photofacial-after.jpg"
+                  src="/images/ba-photofacial-pigmentation-after.jpg"
                   alt="Skin after BBL Photofacial treatment"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/3" }}
