@@ -273,7 +273,7 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 flex flex-col items-center gap-5 text-center"
+          className="mt-20 md:mt-28 flex flex-col items-center gap-5 text-center"
         >
           <a
             href="/services"
