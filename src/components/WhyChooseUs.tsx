@@ -120,7 +120,7 @@ export default function WhyChooseUs() {
                 alt="Natalie performing a facial treatment with magnifying light"
                 className="absolute inset-0 object-cover"
                 style={{ width: "100%", height: "100%" }}
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <div className="relative min-h-0 overflow-hidden rounded-lg">
@@ -129,16 +129,16 @@ export default function WhyChooseUs() {
                 alt="Natalie Sweeney, Owner of Skin Studio Ithaca"
                 className="absolute inset-0 object-cover object-top"
                 style={{ width: "100%", height: "100%" }}
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <div className="relative col-span-2 min-h-0 overflow-hidden rounded-lg">
               <img
-                src="/images/service-microfusion.jpg"
-                alt="Micro-Infusion Facial before and after results"
+                src="/images/service-microfusion-new.jpg"
+                alt="Gloved esthetician using a micro-infusion pen on a client's face"
                 className="absolute inset-0 object-cover"
                 style={{ width: "100%", height: "100%" }}
-                loading="lazy"
+                loading="eager"
               />
             </div>
           </motion.div>

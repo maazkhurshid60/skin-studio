@@ -104,8 +104,8 @@ export default function AboutSection() {
               <img
                 src="/images/natalie-new.webp"
                 alt="Natalie Sweeney, Owner and Lead Esthetician at Skin Studio Ithaca"
-                className="aspect-[3/4] w-full object-cover object-top"
-                loading="lazy"
+                className="aspect-[3/4] w-full -scale-x-100 object-cover object-top"
+                loading="eager"
               />
             </div>
 
@@ -124,7 +124,7 @@ export default function AboutSection() {
                 src="/images/about-treatment.jpg"
                 alt="Skin Studio esthetician performing a detailed skin analysis with magnifying lamp"
                 className="aspect-[3/4] w-full object-cover object-center"
-                loading="lazy"
+                loading="eager"
               />
             </motion.div>
 

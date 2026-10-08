@@ -33,7 +33,7 @@ const services = [
     description:
       "Intense pulsed light (IPL) is a cosmetic skin treatment that offers skin rejuvenation, lightens brown spots and removes vascular redness from the skin making it a great treatment for rosacea skin.",
     tags: ["Brown Spots", "Rosacea", "Sun Damage", "Rejuvenation"],
-    image: "/images/service-ipl.jpg",
+    image: "/images/treatment-hydrofacial.jpg",
     alt: "IPL photo facial treatment for skin rejuvenation",
     href: "/services/ipl-treatments",
   },
@@ -43,7 +43,7 @@ const services = [
     description:
       "If you're not happy with shaving and tweezing to remove unwanted hair, we offer laser hair removal to suit every skin type. Pain-free treatments with our Motus AX technology deliver smooth results in fewer sessions.",
     tags: ["Pain-Free", "All Skin Types", "Motus AX", "Fewer Sessions"],
-    image: "/images/service-laser.jpg",
+    image: "/images/service-laser-treatment.jpg",
     alt: "Professional laser hair removal treatment session",
     href: "/services/laser-hair-removal",
   },

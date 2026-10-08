@@ -93,7 +93,7 @@ export default function LaserHairRemovalPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/service-laser.jpg"
+                  src="/images/service-laser-treatment.jpg"
                   alt="Professional laser hair removal session"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}

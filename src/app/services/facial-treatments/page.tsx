@@ -91,8 +91,8 @@ export default function FacialTreatmentsPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/treatment-facial.jpg"
-                  alt="Facial treatment at Skin Studio Ithaca"
+                  src="/images/treatment-hydrofacial.jpg"
+                  alt="Hydrofacial treatment at Skin Studio Ithaca"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
                   loading="lazy"
