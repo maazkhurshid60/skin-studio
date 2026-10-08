@@ -1,0 +1,15 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "maaz-dev",
+    "main"
+  ],
+  "parent": {
+    "maaz-dev": "main",
+    "main": null
+  },
+  "order": [
+    "main",
+    "maaz-dev"
+  ]
+}
