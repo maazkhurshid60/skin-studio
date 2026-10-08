@@ -19,6 +19,8 @@ export default function BookingCTA() {
             <div className="absolute inset-0 bg-gradient-to-t from-dark-deep/60 to-transparent lg:bg-gradient-to-r" />
           </div>
 
+
+
           <div className="flex flex-col justify-center bg-dark-deep p-10 md:p-14 lg:p-16">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
