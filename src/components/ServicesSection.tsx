@@ -51,7 +51,7 @@ const services = [
     title: "Lash Services",
     description:
       "Our lash specialists offer keratin lash lifts for beautifully curled natural lashes, professional lash tints, and Party Lashes — effortless, everyday beauty.",
-    tags: ["Lash Lift", "Lash Tint", "Party Lashes"],
+    tags: ["Lash Lift", "Lash Tint", "Party Lashes", "Brow Tints"],
     image: "/images/service-lash-v2.jpg",
     alt: "Close-up of naturally curled eyelashes and lash services",
   },
