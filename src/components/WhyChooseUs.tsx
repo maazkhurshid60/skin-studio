@@ -15,7 +15,7 @@ const values = [
     number: "02",
     title: "Advanced Technology",
     description:
-      "From our Motus AX laser to IPL photofacials, we invest in proven, medical-grade technology for safe, effective results.",
+      "From our Versa Pro Diode laser to BBL (Broadband Light) photofacials, we invest in proven, medical-grade technology for safe, effective results.",
   },
   {
     number: "03",

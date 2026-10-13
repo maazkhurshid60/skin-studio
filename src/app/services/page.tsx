@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Phone, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Phone, Sparkles, ExternalLink } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SQUARE_BOOKING_URL, SQUARE_FACIAL_BOOKING_URL } from "@/lib/square";
 
 const services = [
   {
@@ -16,6 +17,7 @@ const services = [
     image: "/images/service-facial.jpg",
     alt: "Professional facial treatment with gentle skincare application",
     href: "/services/facial-treatments",
+    bookUrl: SQUARE_FACIAL_BOOKING_URL,
   },
   {
     number: "02",
@@ -26,36 +28,40 @@ const services = [
     image: "/images/service-microfusion.jpg",
     alt: "Micro-Infusion Facial before and after results",
     href: "/services/micro-infusion-facial",
+    bookUrl: SQUARE_BOOKING_URL,
   },
   {
     number: "03",
-    title: "Photo Facial / IPL",
+    title: "Photo Facial / BBL",
     description:
-      "Intense pulsed light (IPL) is a cosmetic skin treatment that offers skin rejuvenation, lightens brown spots and removes vascular redness from the skin making it a great treatment for rosacea skin.",
+      "Broadband Light (BBL) is an advanced cosmetic skin treatment that offers skin rejuvenation, lightens brown spots and removes vascular redness from the skin making it a great treatment for rosacea skin.",
     tags: ["Brown Spots", "Rosacea", "Sun Damage", "Rejuvenation"],
-    image: "/images/treatment-hydrofacial.jpg",
-    alt: "IPL photo facial treatment for skin rejuvenation",
-    href: "/services/ipl-treatments",
+    image: "/images/service-bbl.jpg",
+    alt: "Professional BBL Photofacial treatment in progress",
+    href: "/services/photo-facial",
+    bookUrl: SQUARE_BOOKING_URL,
   },
   {
     number: "04",
     title: "Laser Hair Removal",
     description:
-      "If you're not happy with shaving and tweezing to remove unwanted hair, we offer laser hair removal to suit every skin type. Pain-free treatments with our Motus AX technology deliver smooth results in fewer sessions.",
-    tags: ["Pain-Free", "All Skin Types", "Motus AX", "Fewer Sessions"],
+      "If you're not happy with shaving and tweezing to remove unwanted hair, we offer laser hair removal to suit every skin type. Pain-free treatments with our Versa Pro Diode technology deliver smooth results in fewer sessions.",
+    tags: ["Pain-Free", "All Skin Types", "Versa Pro Diode", "Fewer Sessions"],
     image: "/images/service-laser-treatment.jpg",
     alt: "Professional laser hair removal treatment session",
     href: "/services/laser-hair-removal",
+    bookUrl: SQUARE_BOOKING_URL,
   },
   {
     number: "05",
     title: "Lash Services",
     description:
-      "Our lash specialists offer Keratin Lash Lifts for beautifully curled natural lashes and professional lash tints. Our technicians are true artists whose work speaks for itself — effortless, everyday beauty that lasts up to 6–8 weeks.",
-    tags: ["Lash Lift", "Lash Tint", "Natural Lashes", "Keratin"],
-    image: "/images/service-lash-new.jpg",
-    alt: "Lash lift and tint before and after results",
+      "Our lash specialists offer Keratin Lash Lifts, professional lash tints, and Party Lashes. Our technicians are true artists whose work speaks for itself — effortless, everyday beauty that lasts up to 6–8 weeks.",
+    tags: ["Lash Lift", "Lash Tint", "Party Lashes", "Keratin"],
+    image: "/images/service-lash-v2.jpg",
+    alt: "Professional lash services including lash lift, tint, and party lashes",
     href: "/services/lash-services",
+    bookUrl: SQUARE_BOOKING_URL,
   },
 ];
 
@@ -127,10 +133,13 @@ function ServiceCard({
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <a
-            href="/book"
-            className="inline-flex rounded-full bg-rose px-7 py-3 font-sans text-[14px] font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-hover"
+            href={service.bookUrl || SQUARE_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-rose px-7 py-3 font-sans text-[14px] font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-hover"
           >
             Book This Treatment
+            <ExternalLink size={13} />
           </a>
           <a
             href={service.href}

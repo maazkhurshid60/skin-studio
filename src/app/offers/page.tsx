@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Sparkles, Zap } from "lucide-react";
+import { Phone, Sparkles, Zap, ExternalLink } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
+import { SQUARE_BOOKING_URL, SQUARE_FACIAL_BOOKING_URL } from "@/lib/square";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -18,8 +19,9 @@ const offers = [
     description:
       "Experience personalized skin analysis tailored to your unique needs. Consultations focus on addressing concerns such as acne, signs of aging, and skin discoloration. We provide customized recommendations to help you achieve healthy, radiant skin.",
     tags: ["Skin Analysis", "Personalized Plan", "All Skin Types"],
-    image: "/images/service-facial.jpg",
-    alt: "Professional facial treatment at Skin Studio Ithaca",
+    image: "/images/treatment-facial.jpg",
+    alt: "Professional facial consultation and treatment at Skin Studio Ithaca",
+    bookingUrl: SQUARE_FACIAL_BOOKING_URL,
   },
   {
     title: "Laser Hair Consultation",
@@ -28,9 +30,10 @@ const offers = [
     icon: Zap,
     description:
       "Laser hair removal for all skin types. Discover if laser hair removal is right for you with a comprehensive consultation. We assess your suitability for the treatment while providing transparent pricing information. Our goal is to ensure you feel informed and confident in your decision for smooth, hair-free skin.",
-    tags: ["All Skin Types", "Transparent Pricing", "Motus AX"],
-    image: "/images/service-laser.jpg",
-    alt: "Professional laser hair removal treatment at Skin Studio Ithaca",
+    tags: ["All Skin Types", "Transparent Pricing", "Versa Pro Diode"],
+    image: "/images/service-laser-treatment.jpg",
+    alt: "Professional Versa Pro Diode laser hair removal consultation at Skin Studio Ithaca",
+    bookingUrl: SQUARE_BOOKING_URL,
   },
 ];
 
@@ -130,7 +133,7 @@ export default function OffersPage() {
                   className="group overflow-hidden rounded-[28px] border border-border-subtle bg-dark-primary shadow-[0_4px_40px_rgba(0,0,0,0.3)] transition-all duration-500 hover:border-rose/20 hover:shadow-[0_8px_60px_rgba(194,90,131,0.1)]"
                 >
                   {/* Image header */}
-                  <div className="relative aspect-[16/9] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={offer.image}
                       alt={offer.alt}
@@ -182,10 +185,13 @@ export default function OffersPage() {
                     </div>
 
                     <a
-                      href="/book"
-                      className="inline-flex w-full items-center justify-center rounded-full bg-rose px-8 py-3.5 font-sans text-[15px] font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-hover"
+                      href={offer.bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-rose px-8 py-3.5 font-sans text-[15px] font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-hover"
                     >
                       Book This Consultation
+                      <ExternalLink size={14} />
                     </a>
                   </div>
                 </motion.div>

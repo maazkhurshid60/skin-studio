@@ -16,7 +16,7 @@ const pages = [
   { slug: "services", path: "/services", title: "Services Overview", desc: "Services index listing all treatments with descriptions and links to detail pages." },
   { slug: "facial-treatments", path: "/services/facial-treatments", title: "Facial Treatments", desc: "Service detail page for facial treatment options, pricing, and booking." },
   { slug: "micro-infusion", path: "/services/micro-infusion-facial", title: "Micro-Infusion Facial", desc: "Micro-Infusion Facial treatment details, procedure info, and results." },
-  { slug: "ipl-treatments", path: "/services/ipl-treatments", title: "Photo Facial / IPL", desc: "IPL photo facial service page with benefits and expected results." },
+  { slug: "photo-facial", path: "/services/photo-facial", title: "Photo Facial / BBL", desc: "BBL photo facial service page with benefits and expected results." },
   { slug: "laser-hair-removal", path: "/services/laser-hair-removal", title: "Laser Hair Removal", desc: "Laser hair removal with treatment areas, pricing, and consultation." },
   { slug: "lash-services", path: "/services/lash-services", title: "Lash Services", desc: "Lash lift and tint service page with details, aftercare, and booking." },
   { slug: "offers", path: "/offers", title: "Special Offers", desc: "Current promotions, special offers, and waitlist signup." },

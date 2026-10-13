@@ -14,7 +14,7 @@ const pages = [
   { slug: "services", path: "/services", title: "Services Overview" },
   { slug: "facial-treatments", path: "/services/facial-treatments", title: "Facial Treatments" },
   { slug: "micro-infusion", path: "/services/micro-infusion-facial", title: "Micro-Infusion Facial" },
-  { slug: "ipl-treatments", path: "/services/ipl-treatments", title: "Photo Facial / IPL" },
+  { slug: "photo-facial", path: "/services/photo-facial", title: "Photo Facial / BBL" },
   { slug: "laser-hair-removal", path: "/services/laser-hair-removal", title: "Laser Hair Removal" },
   { slug: "lash-services", path: "/services/lash-services", title: "Lash Services" },
   { slug: "offers", path: "/offers", title: "Special Offers" },

@@ -29,13 +29,12 @@ const navLinks = [
 const treatmentLinks = [
   { label: "Facial Treatments", href: "/services/facial-treatments" },
   { label: "Micro-Infusion Facial", href: "/services/micro-infusion-facial" },
-  { label: "Photo Facial / IPL", href: "/services/ipl-treatments" },
+  { label: "Photo Facial / BBL", href: "/services/photo-facial" },
   { label: "Laser Hair Removal", href: "/services/laser-hair-removal" },
   { label: "Lash Services", href: "/services/lash-services" },
 ];
 
 const otherLinks = [
-  { label: "Gift Certificates", href: "/product/gift-card", external: false },
   { label: "Offers", href: "/offers", external: false },
   { label: "Cancellation Policy", href: "/cancellation-policy", external: false },
 ];
@@ -101,15 +100,15 @@ export default function Footer() {
               {treatmentLinks.map((link) => {
                 const isExternal = link.href.startsWith("http");
                 return (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="font-sans text-[14px] text-body-muted transition-colors duration-300 hover:text-ivory"
-                  >
-                    {link.label}
-                  </a>
-                </li>
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="font-sans text-[14px] text-body-muted transition-colors duration-300 hover:text-ivory"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
                 );
               })}
             </ul>

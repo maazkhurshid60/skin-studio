@@ -21,7 +21,7 @@ const benefits = [
 
 const tags = ["Brown Spots", "Rosacea", "Sun Damage", "Skin Rejuvenation", "Broken Capillaries"];
 
-export default function IPLTreatmentsPage() {
+export default function PhotoFacialPage() {
   const contentRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(contentRef, { once: true, margin: "-80px" });
   const baRef = useRef<HTMLDivElement>(null);
@@ -35,8 +35,8 @@ export default function IPLTreatmentsPage() {
         <section className="relative flex min-h-[60vh] items-end overflow-hidden pb-20 pt-32 md:min-h-[50vh] md:pb-24 lg:pb-28">
           <div className="absolute inset-0">
             <img
-              src="/images/treatment-hydrofacial.jpg"
-              alt="IPL Photo Facial treatment at Skin Studio Ithaca"
+              src="/images/service-bbl.jpg"
+              alt="Professional BBL Photo Facial treatment at Skin Studio Ithaca"
               className="absolute inset-0 object-cover"
               style={{ width: "100%", height: "100%" }}
               loading="eager"
@@ -56,7 +56,7 @@ export default function IPLTreatmentsPage() {
               <span className="text-border-subtle">/</span>
               <a href="/services" className="transition-colors duration-300 hover:text-ivory">Services</a>
               <span className="text-border-subtle">/</span>
-              <span className="text-ivory">Photo Facial / IPL</span>
+              <span className="text-ivory">Photo Facial / BBL</span>
             </motion.div>
 
             <motion.h1
@@ -74,7 +74,7 @@ export default function IPLTreatmentsPage() {
               transition={{ duration: 0.7, delay: 0.55, ease }}
               className="mt-6 max-w-lg font-sans text-base leading-relaxed text-body-muted md:text-lg"
             >
-              Intense pulsed light therapy offers skin rejuvenation, lightens
+              Broadband Light (BBL) therapy offers skin rejuvenation, lightens
               brown spots, and removes vascular redness — an ideal treatment for
               rosacea and sun damage.
             </motion.p>
@@ -95,8 +95,8 @@ export default function IPLTreatmentsPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/treatment-hydrofacial.jpg"
-                  alt="IPL Photofacial treatment for skin rejuvenation"
+                  src="/images/service-bbl.jpg"
+                  alt="Professional BBL Photofacial treatment in progress"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
                   loading="lazy"
@@ -110,18 +110,18 @@ export default function IPLTreatmentsPage() {
               >
                 <SectionLabel text="Light-Based Rejuvenation" />
                 <h2 className="heading-serif mb-6 text-4xl md:text-5xl lg:text-[56px]">
-                  IPL <span className="heading-serif-italic">Photofacial</span>
+                  BBL <span className="heading-serif-italic">Photofacial</span>
                 </h2>
                 <p className="mb-6 font-sans text-base leading-[1.8] text-body-muted">
-                  IPL Photofacials, also known as Pulsed Light Therapy, involves
-                  a handheld device that emits a pulse of broad-spectrum light
+                  BBL Photofacials, also known as Broadband Light Therapy, involves
+                  a handheld device that emits targeted pulses of broad-spectrum light
                   through direct contact with the skin. It acts on deeper layers
                   of the skin, making it ideal for treating broken capillaries,
                   sun damage, and other impurities.
                 </p>
                 <p className="mb-8 font-sans text-base leading-[1.8] text-body-muted">
                   Skin rejuvenation, brown spot removal, and facial veins all
-                  disappear with IPL Photofacial.
+                  disappear with BBL Photofacial.
                 </p>
 
                 <div className="mb-8 space-y-4">

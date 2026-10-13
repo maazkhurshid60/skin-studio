@@ -26,11 +26,15 @@ import {
   Loader2,
   Mail,
   MessageSquare,
+  ExternalLink,
+  Search,
+  X,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
+import { getSquareServiceUrl, SQUARE_BOOKING_URL } from "@/lib/square";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -50,6 +54,7 @@ type Service = {
   duration_minutes: number;
   category_slug: string;
   category_name: string;
+  square_id?: string | null;
 };
 
 type Provider = {
@@ -59,6 +64,7 @@ type Provider = {
 };
 
 const iconMap: Record<string, React.ElementType> = {
+  all: Sparkles,
   facials: Sparkles,
   dermaplaning: Layers,
   "lash-brow": Eye,
@@ -180,9 +186,8 @@ function DatePicker({
         onClick={toggle}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className={`flex w-full items-center justify-between rounded-xl border bg-dark-primary px-4 py-3 text-left font-sans text-[14px] transition-colors focus:outline-none ${
-          open ? "border-rose/40" : "border-border-subtle hover:border-rose/25"
-        } ${value ? "text-ivory" : "text-body-muted/50"}`}
+        className={`flex w-full items-center justify-between rounded-xl border bg-dark-primary px-4 py-3 text-left font-sans text-[14px] transition-colors focus:outline-none ${open ? "border-rose/40" : "border-border-subtle hover:border-rose/25"
+          } ${value ? "text-ivory" : "text-body-muted/50"}`}
       >
         {value ? formatDisplayDate(value) : placeholder}
         <Calendar size={16} className={open ? "text-rose" : "text-body-muted/60"} />
@@ -248,8 +253,7 @@ function DatePicker({
                       setOpen(false);
                     }}
                     disabled={disabled}
-                    className={`flex h-9 w-full items-center justify-center rounded-lg font-sans text-[13px] transition-all duration-200 ${
-                      isSelected
+                    className={`flex h-9 w-full items-center justify-center rounded-lg font-sans text-[13px] transition-all duration-200 ${isSelected
                         ? "bg-rose font-semibold text-ivory shadow-[0_2px_12px_rgba(194,90,131,0.3)]"
                         : disabled
                           ? "cursor-not-allowed text-body-muted/20"
@@ -258,7 +262,7 @@ function DatePicker({
                             : inRange
                               ? "bg-rose/10 text-ivory hover:bg-rose/20"
                               : "text-body-muted hover:bg-rose/10 hover:text-ivory"
-                    } ${isToday && !isSelected && !disabled ? "font-semibold text-rose" : ""}`}
+                      } ${isToday && !isSelected && !disabled ? "font-semibold text-rose" : ""}`}
                   >
                     {day}
                   </button>
@@ -333,9 +337,8 @@ function ServiceSelect({
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className={`flex w-full items-center justify-between rounded-xl border bg-dark-primary px-4 py-3 text-left font-sans text-[14px] text-body-muted/70 transition-colors focus:outline-none ${
-          open ? "border-rose/40" : "border-border-subtle hover:border-rose/25"
-        }`}
+        className={`flex w-full items-center justify-between rounded-xl border bg-dark-primary px-4 py-3 text-left font-sans text-[14px] text-body-muted/70 transition-colors focus:outline-none ${open ? "border-rose/40" : "border-border-subtle hover:border-rose/25"
+          }`}
       >
         Select a service...
         <ChevronDown
@@ -401,7 +404,8 @@ export default function BookPage() {
 
   // Step state
   const [step, setStep] = useState(1);
-  const [activeCategory, setActiveCategory] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
@@ -438,51 +442,43 @@ export default function BookPage() {
     fetch("/api/services")
       .then((r) => r.json())
       .then((data) => {
-        setCategories(data.categories);
-        setServices(data.services);
-        if (data.categories.length > 0) {
-          setActiveCategory(data.categories[0].slug);
-        }
+        setCategories(data.categories || []);
+        setServices(data.services || []);
+        setActiveCategory("all");
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
-  // Load providers when service changes
-  useEffect(() => {
-    if (!selectedService) return;
-    fetch(`/api/providers?serviceId=${selectedService.id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setProviders(data.providers);
-        if (data.providers.length === 1) {
-          setSelectedProvider(data.providers[0]);
-        }
-      });
-  }, [selectedService]);
+  // Category service count helper
+  const getCategoryCount = (slug: string) => {
+    if (slug === "all") return services.length;
+    if (slug === "consult") {
+      return services.filter(
+        (s) =>
+          s.category_slug === "consult" ||
+          s.name.toLowerCase().includes("consult"),
+      ).length;
+    }
+    return services.filter((s) => s.category_slug === slug).length;
+  };
 
-  // Load availability when provider + date changes
-  useEffect(() => {
-    if (!selectedService || !selectedProvider || !selectedDate) return;
-    setSlotsLoading(true);
-    setSlots([]);
-    setSlotsMessage("");
-    setSelectedTime("");
-    fetch(
-      `/api/availability?serviceId=${selectedService.id}&providerId=${selectedProvider.id}&date=${selectedDate}`,
-    )
-      .then((r) => r.json())
-      .then((data) => {
-        setSlots(data.slots || []);
-        setSlotsMessage(data.message || "");
-        setSlotsLoading(false);
-      })
-      .catch(() => setSlotsLoading(false));
-  }, [selectedService, selectedProvider, selectedDate]);
-
-  const filteredServices = services.filter(
-    (s) => s.category_slug === activeCategory,
-  );
+  // Filtered services
+  const filteredServices = services.filter((s) => {
+    const matchesCat =
+      activeCategory === "all" ||
+      s.category_slug === activeCategory ||
+      (activeCategory === "consult" &&
+        (s.category_slug === "consult" ||
+          s.name.toLowerCase().includes("consult")));
+    if (!matchesCat) return false;
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase().trim();
+    return (
+      s.name.toLowerCase().includes(q) ||
+      (s.description && s.description.toLowerCase().includes(q))
+    );
+  });
 
   const scrollToForm = useCallback(() => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -706,13 +702,12 @@ export default function BookPage() {
                 key={dateStr}
                 onClick={() => !disabled && setSelectedDate(dateStr)}
                 disabled={disabled}
-                className={`relative flex h-9 w-full items-center justify-center rounded-lg font-sans text-[13px] transition-all duration-200 ${
-                  isSelected
+                className={`relative flex h-9 w-full items-center justify-center rounded-lg font-sans text-[13px] transition-all duration-200 ${isSelected
                     ? "bg-rose font-semibold text-ivory"
                     : disabled
                       ? "cursor-not-allowed text-body-muted/20"
                       : "text-body-muted hover:bg-rose/10 hover:text-ivory"
-                } ${isToday && !isSelected ? "font-semibold text-rose" : ""}`}
+                  } ${isToday && !isSelected ? "font-semibold text-rose" : ""}`}
               >
                 {day}
               </button>
@@ -783,30 +778,29 @@ export default function BookPage() {
         <section ref={formRef} className="bg-dark-secondary py-20 md:py-28 lg:py-36">
           <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
             {!loading && step === 1 && (
-            <div className="mb-8 flex w-full flex-wrap gap-2 md:mb-10">
-              {categories.map((cat) => {
-                const Icon = iconMap[cat.slug] || Sparkles;
-                const isActive = activeCategory === cat.slug;
-                const count = services.filter((s) => s.category_slug === cat.slug).length;
-                return (
-                  <button
-                    key={cat.slug}
-                    onClick={() => setActiveCategory(cat.slug)}
-                    className={`flex items-center gap-2 rounded-full px-4 py-2.5 font-sans text-[13px] font-medium transition-all duration-300 ${
-                      isActive
-                        ? "bg-rose text-ivory shadow-[0_2px_12px_rgba(194,90,131,0.3)]"
-                        : "border border-border-subtle text-body-muted hover:border-rose/30 hover:text-ivory"
-                    }`}
-                  >
-                    <Icon size={14} />
-                    {cat.name}
-                    <span className={`ml-0.5 text-[11px] ${isActive ? "text-ivory/70" : "text-body-muted/50"}`}>
-                      ({count})
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+              <div className="mb-8 flex w-full flex-wrap gap-2 md:mb-10">
+                {categories.map((cat) => {
+                  const Icon = iconMap[cat.slug] || Sparkles;
+                  const isActive = activeCategory === cat.slug;
+                  const count = services.filter((s) => s.category_slug === cat.slug).length;
+                  return (
+                    <button
+                      key={cat.slug}
+                      onClick={() => setActiveCategory(cat.slug)}
+                      className={`flex items-center gap-2 rounded-full px-4 py-2.5 font-sans text-[13px] font-medium transition-all duration-300 ${isActive
+                          ? "bg-rose text-ivory shadow-[0_2px_12px_rgba(194,90,131,0.3)]"
+                          : "border border-border-subtle text-body-muted hover:border-rose/30 hover:text-ivory"
+                        }`}
+                    >
+                      <Icon size={14} />
+                      {cat.name}
+                      <span className={`ml-0.5 text-[11px] ${isActive ? "text-ivory/70" : "text-body-muted/50"}`}>
+                        ({count})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             )}
 
             <div className="grid gap-10 lg:grid-cols-[1fr_380px] lg:gap-14">
@@ -829,32 +823,51 @@ export default function BookPage() {
                       >
                         <div className="grid gap-3 sm:grid-cols-2">
                           {filteredServices.map((service, i) => (
-                            <motion.div
+                            <motion.a
                               key={service.id}
+                              href={getSquareServiceUrl(service.square_id)}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               initial={{ opacity: 0, y: 16 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.4, delay: i * 0.04, ease }}
-                              className="group rounded-2xl border border-border-subtle bg-dark-primary p-5 text-left transition-all duration-300 hover:border-rose/30 hover:shadow-[0_4px_20px_rgba(194,90,131,0.08)] md:p-6"
+                              className="group flex flex-col justify-between rounded-2xl border border-border-subtle bg-dark-primary p-5 text-left transition-all duration-300 hover:border-rose/30 hover:bg-dark-primary/80 hover:shadow-[0_4px_20px_rgba(194,90,131,0.08)] md:p-6"
                             >
-                              <h3 className="mb-2 font-serif text-[17px] font-semibold text-ivory transition-colors duration-300 group-hover:text-rose md:text-[18px]">
-                                {service.name}
-                              </h3>
-                              <div className="mb-3 flex items-center gap-3 font-sans text-[13px] text-body-muted">
-                                <span className="flex items-center gap-1">
-                                  <DollarSign size={12} className="text-rose/60" />
-                                  {formatPrice(service.price_cents)}
-                                </span>
-                                <span className="flex items-center gap-1">
-                                  <Clock size={12} className="text-rose/60" />
-                                  {formatDuration(service.duration_minutes)}
-                                </span>
+                              <div>
+                                <div className="mb-2 flex items-start justify-between gap-3">
+                                  <h3 className="font-serif text-[17px] font-semibold text-ivory transition-colors duration-300 group-hover:text-rose md:text-[18px]">
+                                    {service.name}
+                                  </h3>
+                                  <ExternalLink
+                                    size={15}
+                                    className="mt-1 shrink-0 text-body-muted/40 transition-colors duration-300 group-hover:text-rose"
+                                  />
+                                </div>
+                                <div className="mb-3 flex items-center gap-3 font-sans text-[13px] text-body-muted">
+                                  <span className="flex items-center gap-1">
+                                    <DollarSign size={12} className="text-rose/60" />
+                                    {formatPrice(service.price_cents)}
+                                  </span>
+                                  <span className="flex items-center gap-1">
+                                    <Clock size={12} className="text-rose/60" />
+                                    {formatDuration(service.duration_minutes)}
+                                  </span>
+                                </div>
+                                {service.description && (
+                                  <p className="mb-4 line-clamp-2 font-sans text-[13px] leading-[1.7] text-body-muted/70">
+                                    {service.description}
+                                  </p>
+                                )}
                               </div>
-                              {service.description && (
-                                <p className="mb-3 line-clamp-2 font-sans text-[13px] leading-[1.7] text-body-muted/70">
-                                  {service.description}
-                                </p>
-                              )}
-                            </motion.div>
+
+                              <div className="mt-2 flex items-center gap-1.5 font-sans text-[13px] font-semibold text-rose transition-colors duration-300 group-hover:text-rose-hover">
+                                <span>Book Appointment</span>
+                                <ArrowRight
+                                  size={13}
+                                  className="transition-transform duration-300 group-hover:translate-x-1"
+                                />
+                              </div>
+                            </motion.a>
                           ))}
                         </div>
 
@@ -1033,9 +1046,8 @@ export default function BookPage() {
               if (errors.name) setErrors((p) => ({ ...p, name: "" }));
             }}
             placeholder="Your full name"
-            className={`w-full rounded-xl border bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory placeholder:text-body-muted/40 focus:outline-none ${
-              errors.name ? "border-red-500/50 focus:border-red-500" : "border-border-subtle focus:border-rose/40"
-            }`}
+            className={`w-full rounded-xl border bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory placeholder:text-body-muted/40 focus:outline-none ${errors.name ? "border-red-500/50 focus:border-red-500" : "border-border-subtle focus:border-rose/40"
+              }`}
           />
           {errors.name && <p className="mt-1 font-sans text-[12px] text-red-400">{errors.name}</p>}
         </div>
@@ -1053,9 +1065,8 @@ export default function BookPage() {
               if (errors.email) setErrors((p) => ({ ...p, email: "" }));
             }}
             placeholder="your@email.com"
-            className={`w-full rounded-xl border bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory placeholder:text-body-muted/40 focus:outline-none ${
-              errors.email ? "border-red-500/50 focus:border-red-500" : "border-border-subtle focus:border-rose/40"
-            }`}
+            className={`w-full rounded-xl border bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory placeholder:text-body-muted/40 focus:outline-none ${errors.email ? "border-red-500/50 focus:border-red-500" : "border-border-subtle focus:border-rose/40"
+              }`}
           />
           {errors.email && <p className="mt-1 font-sans text-[12px] text-red-400">{errors.email}</p>}
         </div>
@@ -1073,9 +1084,8 @@ export default function BookPage() {
               if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
             }}
             placeholder="(607) 555-1234"
-            className={`w-full rounded-xl border bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory placeholder:text-body-muted/40 focus:outline-none ${
-              errors.phone ? "border-red-500/50 focus:border-red-500" : "border-border-subtle focus:border-rose/40"
-            }`}
+            className={`w-full rounded-xl border bg-dark-primary px-4 py-3 font-sans text-[14px] text-ivory placeholder:text-body-muted/40 focus:outline-none ${errors.phone ? "border-red-500/50 focus:border-red-500" : "border-border-subtle focus:border-rose/40"
+              }`}
           />
           {errors.phone && <p className="mt-1 font-sans text-[12px] text-red-400">{errors.phone}</p>}
         </div>

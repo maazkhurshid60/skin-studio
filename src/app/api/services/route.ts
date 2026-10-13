@@ -11,7 +11,7 @@ export async function GET() {
 
   const services = queryAll(
     db,
-    `SELECT s.id, s.category_id, s.name, s.description, s.price_cents, s.duration_minutes, s.sort_order,
+    `SELECT s.id, s.category_id, s.name, s.description, s.price_cents, s.duration_minutes, s.sort_order, s.square_id,
             c.slug as category_slug, c.name as category_name
      FROM services s
      JOIN categories c ON c.id = s.category_id

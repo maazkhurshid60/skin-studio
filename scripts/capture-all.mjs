@@ -14,7 +14,7 @@ const mainPages = [
   ["04-services", "/services"],
   ["05-facial-treatments", "/services/facial-treatments"],
   ["06-micro-infusion", "/services/micro-infusion-facial"],
-  ["07-ipl-treatments", "/services/ipl-treatments"],
+  ["07-photo-facial", "/services/photo-facial"],
   ["08-laser-hair-removal", "/services/laser-hair-removal"],
   ["09-lash-services", "/services/lash-services"],
   ["10-offers", "/offers"],

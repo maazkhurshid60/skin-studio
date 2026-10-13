@@ -131,6 +131,25 @@ export default function ContactSection() {
               </p>
             </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-12 overflow-hidden rounded-[24px] border border-border-subtle shadow-2xl"
+          >
+            <iframe
+              loading="lazy"
+              src="https://maps.google.com/maps?q=Community%20Corners%20Plaza%20903%20Hanshaw%20Road%20Ithaca%20NY%2014850&t=m&z=15&output=embed&iwloc=near"
+              title="Community Corners Plaza 903 Hanshaw Road Ithaca NY 14850"
+              aria-label="Community Corners Plaza 903 Hanshaw Road Ithaca NY 14850"
+              className="h-[360px] w-full md:h-[420px]"
+              style={{ border: 0 }}
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>

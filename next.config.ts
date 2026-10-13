@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/**": ["./node_modules/sql.js/dist/sql-wasm.wasm"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/services/ipl-treatments",
+        destination: "/services/photo-facial",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

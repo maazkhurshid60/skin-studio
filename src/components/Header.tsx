@@ -35,7 +35,7 @@ const navLinks: NavItem[] = [
       },
       {
         label: "Photo Facial",
-        href: "/services/ipl-treatments",
+        href: "/services/photo-facial",
       },
       {
         label: "Lash Services",
@@ -47,16 +47,7 @@ const navLinks: NavItem[] = [
       },
     ],
   },
-  {
-    label: "About Us",
-    href: "/about",
-    children: [
-      {
-        label: "Gift Certificates",
-        href: "/product/gift-card",
-      },
-    ],
-  },
+  { label: "About Us", href: "/about" },
   { label: "Team", href: "/team" },
   { label: "Offers", href: "/offers" },
   { label: "Contact", href: "/contact" },

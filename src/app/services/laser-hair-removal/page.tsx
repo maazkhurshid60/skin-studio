@@ -15,11 +15,11 @@ const benefits = [
   "Pain-free laser hair removal with no downtime",
   "Effective on the widest range of skin types and colors",
   "Achieves optimal clearance in fewer sessions",
-  "Maximum patient comfort with Motus AX technology",
+  "Maximum patient comfort with Versa Pro Diode technology",
   "Highly effective for pigmented lesions",
 ];
 
-const tags = ["Pain-Free", "All Skin Types", "Fewer Sessions", "Motus AX", "No Downtime"];
+const tags = ["Pain-Free", "All Skin Types", "Fewer Sessions", "Versa Pro Diode", "No Downtime"];
 
 export default function LaserHairRemovalPage() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -72,7 +72,7 @@ export default function LaserHairRemovalPage() {
               transition={{ duration: 0.7, delay: 0.55, ease }}
               className="mt-6 max-w-lg font-sans text-base leading-relaxed text-body-muted md:text-lg"
             >
-              Pain-free laser hair removal with our Motus AX technology.
+              Pain-free laser hair removal with our Versa Pro Diode technology.
               Effective across the widest range of skin types, delivering smooth
               results in fewer sessions.
             </motion.p>
@@ -108,14 +108,14 @@ export default function LaserHairRemovalPage() {
               >
                 <SectionLabel text="Smooth, Lasting Results" />
                 <h2 className="heading-serif mb-6 text-4xl md:text-5xl lg:text-[56px]">
-                  Motus AX <span className="heading-serif-italic">Technology</span>
+                  Versa Pro Diode <span className="heading-serif-italic">Technology</span>
                 </h2>
                 <p className="mb-6 font-sans text-base leading-[1.8] text-body-muted">
                   Achieve optimal laser hair removal clearance on a wide range of
                   skin types in fewer sessions with maximum patient comfort.
                 </p>
                 <p className="mb-8 font-sans text-base leading-[1.8] text-body-muted">
-                  The Motus AX laser hair removal treatment is fast, painless and
+                  The Versa Pro Diode laser hair removal treatment is fast, painless and
                   effective on the widest range of skin types and colors more
                   than any other laser hair removal treatment. It is also highly
                   effective for pigmented lesions.

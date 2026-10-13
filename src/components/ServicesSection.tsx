@@ -28,19 +28,19 @@ const services = [
   {
     number: "03",
     eyebrow: "Light-Based Rejuvenation",
-    title: "Photo Facial / IPL",
+    title: "Photo Facial / BBL",
     description:
-      "Intense pulsed light therapy offers skin rejuvenation, lightens brown spots, and removes vascular redness — an ideal treatment for rosacea and sun damage.",
+      "Broadband Light (BBL) therapy offers skin rejuvenation, lightens brown spots, and removes vascular redness — an ideal treatment for rosacea and sun damage.",
     tags: ["Brown Spots", "Rosacea", "Sun Damage"],
-    image: "/images/treatment-hydrofacial.jpg",
-    alt: "IPL photo facial treatment for skin rejuvenation",
+    image: "/images/service-bbl.jpg",
+    alt: "Professional BBL Photofacial treatment in progress",
   },
   {
     number: "04",
     eyebrow: "Smooth, Lasting Results",
     title: "Laser Hair Removal",
     description:
-      "Pain-free laser hair removal with our Motus AX technology. Effective across the widest range of skin types, delivering smooth results in fewer sessions.",
+      "Pain-free laser hair removal with our Versa Pro Diode technology. Effective across the widest range of skin types, delivering smooth results in fewer sessions.",
     tags: ["Pain-Free", "All Skin Types", "Fewer Sessions"],
     image: "/images/service-laser.jpg",
     alt: "Professional laser hair removal treatment session",
@@ -50,10 +50,10 @@ const services = [
     eyebrow: "Wake Up Ready",
     title: "Lash Services",
     description:
-      "Our lash specialists offer keratin lash lifts for beautifully curled natural lashes and professional lash tints — effortless, everyday beauty that lasts up to 6–8 weeks.",
-    tags: ["Lash Lift", "Lash Tint", "Natural Lashes"],
+      "Our lash specialists offer keratin lash lifts for beautifully curled natural lashes, professional lash tints, and Party Lashes — effortless, everyday beauty.",
+    tags: ["Lash Lift", "Lash Tint", "Party Lashes"],
     image: "/images/service-lash-v2.jpg",
-    alt: "Close-up of naturally curled eyelashes",
+    alt: "Close-up of naturally curled eyelashes and lash services",
   },
 ];
 

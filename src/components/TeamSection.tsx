@@ -7,6 +7,7 @@ import SectionLabel from "./SectionLabel";
 
 const team = [
   {
+    id: 1,
     name: "Natalie Sweeney",
     role: "Lead Esthetician & Co-Founder",
     bio: "With over 26 years of experience in medical aesthetics, Natalie specializes in advanced laser treatments and skin rejuvenation. Her passion for science-backed skincare drives every consultation.",
@@ -14,13 +15,7 @@ const team = [
     alt: "Natalie Sweeney, Lead Esthetician and Co-Founder at Skin Studio Ithaca",
   },
   {
-    name: "Nane Lafleur",
-    role: "Licensed Aesthetician",
-    bio: "Nane brings warmth and expertise to every treatment. Specializing in customized facials and acne protocols, she has helped hundreds of clients achieve clear, glowing skin.",
-    image: "/images/nana-new.jpg",
-    alt: "Nane Lafleur, Licensed Aesthetician at Skin Studio Ithaca",
-  },
-  {
+    id: 2,
     name: "Christie",
     role: "Massage Therapist",
     bio: "",
@@ -28,14 +23,23 @@ const team = [
     alt: "Christie, Massage Therapist at Skin Studio Ithaca",
   },
   {
+    id: 3,
     name: "Linda Roman",
     role: "Licensed Aesthetician & Lash Specialist",
     bio: "Linda is our resident lash and skincare expert, bringing meticulous care and a warm touch to every appointment. Her attention to detail ensures beautiful, natural-looking results.",
     image: "/images/linda-new.jpg",
     alt: "Linda Roman, Licensed Aesthetician and Lash Specialist at Skin Studio Ithaca",
   },
-];
 
+  {
+    id: 4,
+    name: "Nana Lafleur",
+    role: "Licensed Aesthetician",
+    bio: "Nana brings warmth and expertise to every treatment. Specializing in customized facials and acne protocols, she has helped hundreds of clients achieve clear, glowing skin.",
+    image: "/images/nana-new.jpg",
+    alt: "Nana Lafleur, Licensed Aesthetician at Skin Studio Ithaca",
+  },
+];
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function TeamCard({
@@ -90,11 +94,10 @@ function TeamCard({
                 aria-expanded={open}
                 aria-label={`Read ${member.name}'s bio`}
                 onClick={() => setOpen((v) => !v)}
-                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ${
-                  open
-                    ? "rotate-45 border-rose bg-rose text-ivory"
-                    : "border-white/20 text-ivory/80 hover:border-rose/60 hover:text-ivory"
-                }`}
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ${open
+                  ? "rotate-45 border-rose bg-rose text-ivory"
+                  : "border-white/20 text-ivory/80 hover:border-rose/60 hover:text-ivory"
+                  }`}
               >
                 <Plus size={16} aria-hidden="true" />
               </button>
@@ -102,11 +105,10 @@ function TeamCard({
           </div>
           {hasBio && (
             <div
-              className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                open
-                  ? "grid-rows-[1fr] opacity-100"
-                  : "grid-rows-[0fr] opacity-0"
-              }`}
+              className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${open
+                ? "grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0"
+                }`}
             >
               <p className="overflow-hidden font-sans text-[13.5px] leading-[1.7] text-body-muted">
                 <span className="block pt-4">{member.bio}</span>

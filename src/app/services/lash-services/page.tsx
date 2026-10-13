@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Phone } from "lucide-react";
+import { Phone, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -14,12 +14,40 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const benefits = [
   "Keratin lash lifts for beautifully curled natural lashes",
   "Professional lash tints for defined, low-maintenance lashes",
-  "Lash extensions in Natural and Glamour looks",
+  "Custom Brow Tints for beautifully sculpted, full-looking brows",
+  "Party Lashes for an instant, glamorous look for special events",
   "Results that last up to 6–8 weeks",
   "Technicians who are true artists — their work speaks for itself",
 ];
 
-const tags = ["Lash Lift", "Lash Tint", "Lash Extensions", "Keratin", "Natural Lashes"];
+const tags = ["Lash Lift", "Lash Tint", "Brow Tints", "Party Lashes", "Keratin", "Natural Brows"];
+
+const serviceBoxes = [
+  {
+    title: "Keratin Lash Lift",
+    tagline: "Natural Curl & Lift",
+    description:
+      "Curls and lifts your natural lashes from root to tip using a nourishing keratin formula for a wide-awake, mascara-free look lasting 6–8 weeks.",
+  },
+  {
+    title: "Lash Tint",
+    tagline: "Deep Definition",
+    description:
+      "A rich, semi-permanent tint applied to your natural eyelashes for bold, smudge-proof definition without the daily hassle of mascara.",
+  },
+  {
+    title: "Brow Tints",
+    tagline: "Shape & Definition",
+    description:
+      "Custom color-matched tinting designed to darken, sculpt, and fill in sparse eyebrow hairs, giving your face a polished, natural frame.",
+  },
+  {
+    title: "Party Lashes",
+    tagline: "Instant Glamour",
+    description:
+      "Customizable, lightweight cluster lash applications tailored for instant volume, drama, and length — ideal for weekends, events, and photos.",
+  },
+];
 
 export default function LashServicesPage() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -72,8 +100,8 @@ export default function LashServicesPage() {
               transition={{ duration: 0.7, delay: 0.55, ease }}
               className="mt-6 max-w-lg font-sans text-base leading-relaxed text-body-muted md:text-lg"
             >
-              Keratin lash lifts, professional tints, and lash extensions —
-              effortless, everyday beauty that lasts up to 6–8 weeks.
+              Keratin lash lifts, professional tints, Brow Tints, and Party Lashes —
+              effortless, everyday beauty that enhances your natural look.
             </motion.p>
           </div>
         </section>
@@ -92,8 +120,8 @@ export default function LashServicesPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/service-lash.jpg"
-                  alt="Lash lift and tint results"
+                  src="/images/service-lash-treatment.jpg"
+                  alt="Professional lash and brow treatment session at Skin Studio Ithaca"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
                   loading="lazy"
@@ -110,10 +138,10 @@ export default function LashServicesPage() {
                   Effortless <span className="heading-serif-italic">Beauty</span>
                 </h2>
                 <p className="mb-6 font-sans text-base leading-[1.8] text-body-muted">
-                  Our lash specialists work exclusively with eyelash extensions
-                  and Keratin lash lifts. We offer lash extensions in Natural and
-                  Glamour looks — our technicians are true artists, and their
-                  work is simply amazing.
+                  Our lash and brow specialists specialize in Keratin lash lifts,
+                  professional lash tints, Brow Tints, and Party Lashes. Whether you
+                  want a natural curl or defined brows for everyday elegance or a special
+                  occasion, our technicians are true artists whose work speaks for itself.
                 </p>
                 <p className="mb-8 font-sans text-base leading-[1.8] text-body-muted">
                   Keratin lash lifts are a great option for those looking to curl
@@ -160,6 +188,58 @@ export default function LashServicesPage() {
                   </a>
                 </div>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Treatment Service Boxes */}
+        <section className="border-t border-border-subtle bg-dark-primary py-24 md:py-32">
+          <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+            <div className="mb-14 text-center">
+              <SectionLabel text="Our Offerings" align="center" />
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, ease }}
+                className="heading-serif text-4xl md:text-5xl lg:text-[56px]"
+              >
+                Lash & Brow <span className="heading-serif-italic">Treatments</span>
+              </motion.h2>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {serviceBoxes.map((box, i) => (
+                <motion.div
+                  key={box.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.7, delay: i * 0.1, ease }}
+                  className="flex flex-col justify-between rounded-2xl border border-border-subtle bg-dark-secondary/60 p-7 transition-all duration-300 hover:border-rose/40 hover:bg-dark-secondary"
+                >
+                  <div>
+                    <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-rose">
+                      {box.tagline}
+                    </span>
+                    <h3 className="heading-serif mt-3 text-2xl text-ivory">
+                      {box.title}
+                    </h3>
+                    <p className="mt-4 font-sans text-[14px] leading-[1.75] text-body-muted">
+                      {box.description}
+                    </p>
+                  </div>
+                  <div className="mt-8 border-t border-white/5 pt-4">
+                    <a
+                      href="/book"
+                      className="inline-flex items-center gap-1.5 font-sans text-[13px] font-semibold text-rose transition-colors duration-300 hover:text-ivory"
+                    >
+                      Book This Service
+                      <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

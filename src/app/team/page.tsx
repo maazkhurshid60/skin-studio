@@ -13,11 +13,11 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const teamMembers = [
   {
-    name: "Nane Lafleur",
+    name: "Nana Lafleur",
     role: "Licensed Aesthetician",
-    bio: "Nane brings warmth and expertise to every treatment. Specializing in customized facials and acne protocols, she has helped hundreds of clients achieve clear, glowing skin.",
+    bio: "Nana brings warmth and expertise to every treatment. Specializing in customized facials and acne protocols, she has helped hundreds of clients achieve clear, glowing skin.",
     image: "/images/nana-new.jpg",
-    alt: "Nane Lafleur, Licensed Aesthetician at Skin Studio Ithaca",
+    alt: "Nana Lafleur, Licensed Aesthetician at Skin Studio Ithaca",
     tags: ["Custom Facials", "Acne Care", "Skin Analysis"],
   },
   {
@@ -167,10 +167,9 @@ export default function TeamPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/natalie-sweeney-about.jpg"
+                  src="/images/natalie-new.webp"
                   alt="Natalie Sweeney, Owner and Lead Esthetician at Skin Studio Ithaca"
-                  className="w-full object-cover"
-                  style={{ aspectRatio: "4/5" }}
+                  className="aspect-[3/4] w-full object-cover object-top"
                   loading="eager"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-primary/60 to-transparent p-8">

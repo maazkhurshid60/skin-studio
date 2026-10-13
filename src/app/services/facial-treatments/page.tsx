@@ -2,12 +2,13 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Phone } from "lucide-react";
+import { Phone, ExternalLink } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
+import { SQUARE_FACIAL_BOOKING_URL } from "@/lib/square";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -17,7 +18,7 @@ const highlights = [
   "Free facial consultations with all skincare services",
 ];
 
-const tags = ["Deep Cleanse", "Hydration", "Acne Care", "Chemical Peels", "Skin Tightening", "Fusion Facials"];
+const tags = ["Deep Cleanse", "Hydration", "Acne Care", "Chemical Peels", "Anti-Aging", "Fusion Facials"];
 
 export default function FacialTreatmentsPage() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -142,10 +143,13 @@ export default function FacialTreatmentsPage() {
 
                 <div className="flex flex-wrap items-center gap-4">
                   <a
-                    href="/book"
-                    className="inline-flex rounded-full bg-rose px-8 py-3.5 font-sans text-[15px] font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-hover"
+                    href={SQUARE_FACIAL_BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-rose px-8 py-3.5 font-sans text-[15px] font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-rose-hover"
                   >
                     Book a Facial
+                    <ExternalLink size={14} />
                   </a>
                   <a
                     href="tel:6072628566"
