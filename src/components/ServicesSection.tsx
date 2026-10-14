@@ -12,7 +12,7 @@ const services = [
     description:
       "Customized to each client's needs — from acne elimination to microdermabrasion, our signature facials combine relaxation with powerful, lasting results.",
     tags: ["Deep Cleanse", "Hydration", "Acne Care"],
-    image: "/images/service-facial.jpg",
+    image: "/images/service-facial-mask.jpg",
     alt: "Professional facial treatment with gentle skincare application",
   },
   {
@@ -32,7 +32,7 @@ const services = [
     description:
       "Broadband Light (BBL) therapy offers skin rejuvenation, lightens brown spots, and removes vascular redness — an ideal treatment for rosacea and sun damage.",
     tags: ["Brown Spots", "Rosacea", "Sun Damage"],
-    image: "/images/service-bbl.jpg",
+    image: "/images/service-photofacial-ipl.jpg",
     alt: "Professional BBL Photofacial treatment in progress",
   },
   {

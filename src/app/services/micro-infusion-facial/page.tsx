@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
+import ServiceBeforeAfter from "@/components/ServiceBeforeAfter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -93,8 +94,8 @@ export default function MicroInfusionFacialPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/service-micro.jpg"
-                  alt="Micro-Infusion Facial results"
+                  src="/images/service-microfusion-new.jpg"
+                  alt="Gloved esthetician using a micro-infusion pen on a client's face"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
                   loading="lazy"
@@ -165,6 +166,18 @@ export default function MicroInfusionFacialPage() {
             </div>
           </div>
         </section>
+
+        <ServiceBeforeAfter
+          items={[
+            {
+              beforeSrc: "/images/ba-skin-rejuvenation-before.jpg",
+              afterSrc: "/images/ba-skin-rejuvenation-after.jpg",
+              beforeAlt: "Face before skin rejuvenation",
+              afterAlt: "Face after skin rejuvenation",
+              aspectRatio: "3/2",
+            },
+          ]}
+        />
 
         <Testimonials showCTAs={false} />
         <BookingCTA />

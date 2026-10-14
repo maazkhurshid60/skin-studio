@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
+import ServiceBeforeAfter from "@/components/ServiceBeforeAfter";
 import { SQUARE_FACIAL_BOOKING_URL } from "@/lib/square";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -32,7 +33,7 @@ export default function FacialTreatmentsPage() {
         <section className="relative flex min-h-[60vh] items-end overflow-hidden pb-20 pt-32 md:min-h-[50vh] md:pb-24 lg:pb-28">
           <div className="absolute inset-0">
             <img
-              src="/images/service-facial.jpg"
+              src="/images/service-facial-mask.jpg"
               alt="Professional facial treatment at Skin Studio Ithaca"
               className="absolute inset-0 object-cover"
               style={{ width: "100%", height: "100%" }}
@@ -92,8 +93,8 @@ export default function FacialTreatmentsPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/treatment-hydrofacial.jpg"
-                  alt="Hydrofacial treatment at Skin Studio Ithaca"
+                  src="/images/service-facial-mask.jpg"
+                  alt="Facial treatment with a clay mask at Skin Studio Ithaca"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
                   loading="lazy"
@@ -163,6 +164,17 @@ export default function FacialTreatmentsPage() {
             </div>
           </div>
         </section>
+
+        <ServiceBeforeAfter
+          items={[
+            {
+              beforeSrc: "/images/ba-eye-wrinkle-before.jpg",
+              afterSrc: "/images/ba-eye-wrinkle-after.jpg",
+              beforeAlt: "Eye area before a skin rejuvenation facial",
+              afterAlt: "Eye area after a skin rejuvenation facial",
+            },
+          ]}
+        />
 
         <Testimonials showCTAs={false} />
         <BookingCTA />

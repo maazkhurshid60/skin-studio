@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
+import ServiceBeforeAfter from "@/components/ServiceBeforeAfter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -162,6 +163,17 @@ export default function LaserHairRemovalPage() {
             </div>
           </div>
         </section>
+
+        <ServiceBeforeAfter
+          items={[
+            {
+              beforeSrc: "/images/ba-facial-tightening-before.jpg",
+              afterSrc: "/images/ba-facial-tightening-after.jpg",
+              beforeAlt: "Skin before treatment",
+              afterAlt: "Skin after treatment",
+            },
+          ]}
+        />
 
         <Testimonials showCTAs={false} />
         <BookingCTA />
