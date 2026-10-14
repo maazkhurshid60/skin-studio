@@ -25,7 +25,7 @@ const services = [
     description:
       "More than just a passing trend, Micro-Infusion Facial is a proven way to boost your collagen production, tighten skin, reduce fine lines, reduce large pores and resurface skin.",
     tags: ["Collagen Boost", "Fine Lines", "Pore Refining", "Skin Resurfacing"],
-    image: "/images/service-microfusion.jpg",
+    image: "/images/service-microfusion-new.jpg",
     alt: "Micro-Infusion Facial before and after results",
     href: "/services/micro-infusion-facial",
     bookUrl: SQUARE_BOOKING_URL,
