@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
+import ServiceBeforeAfter from "@/components/ServiceBeforeAfter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -24,8 +25,6 @@ const tags = ["Brown Spots", "Rosacea", "Sun Damage", "Skin Rejuvenation", "Brok
 export default function PhotoFacialPage() {
   const contentRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(contentRef, { once: true, margin: "-80px" });
-  const baRef = useRef<HTMLDivElement>(null);
-  const baInView = useInView(baRef, { once: true, margin: "-80px" });
 
   return (
     <>
@@ -35,7 +34,7 @@ export default function PhotoFacialPage() {
         <section className="relative flex min-h-[60vh] items-end overflow-hidden pb-20 pt-32 md:min-h-[50vh] md:pb-24 lg:pb-28">
           <div className="absolute inset-0">
             <img
-              src="/images/service-bbl.jpg"
+              src="/images/service-photofacial-ipl.jpg"
               alt="Professional BBL Photo Facial treatment at Skin Studio Ithaca"
               className="absolute inset-0 object-cover"
               style={{ width: "100%", height: "100%" }}
@@ -95,7 +94,7 @@ export default function PhotoFacialPage() {
                 className="relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src="/images/service-bbl.jpg"
+                  src="/images/service-photofacial-ipl.jpg"
                   alt="Professional BBL Photofacial treatment in progress"
                   className="w-full object-cover"
                   style={{ aspectRatio: "4/5" }}
@@ -166,60 +165,16 @@ export default function PhotoFacialPage() {
           </div>
         </section>
 
-        {/* Before & After */}
-        <section className="bg-dark-primary py-28 md:py-36 lg:py-44">
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-            <div className="mb-16 text-center">
-              <SectionLabel text="Real Results" align="center" />
-              <motion.h2
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, ease }}
-                className="heading-serif text-4xl md:text-5xl lg:text-[56px]"
-              >
-                Before & <span className="heading-serif-italic">After</span>
-              </motion.h2>
-            </div>
-
-            <motion.div
-              ref={baRef}
-              initial={{ opacity: 0, y: 30 }}
-              animate={baInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease }}
-              className="grid gap-6 md:grid-cols-2"
-            >
-              <div className="overflow-hidden rounded-2xl border border-border-subtle">
-                <div className="bg-dark-secondary/60 px-5 py-3">
-                  <span className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-body-muted">
-                    Before
-                  </span>
-                </div>
-                <img
-                  src="/images/ba-photofacial-pigmentation-before.jpg"
-                  alt="Skin before BBL Photofacial treatment"
-                  className="w-full object-cover"
-                  style={{ aspectRatio: "4/3" }}
-                  loading="lazy"
-                />
-              </div>
-              <div className="overflow-hidden rounded-2xl border border-border-subtle">
-                <div className="bg-dark-secondary/60 px-5 py-3">
-                  <span className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-body-muted">
-                    After
-                  </span>
-                </div>
-                <img
-                  src="/images/ba-photofacial-pigmentation-after.jpg"
-                  alt="Skin after BBL Photofacial treatment"
-                  className="w-full object-cover"
-                  style={{ aspectRatio: "4/3" }}
-                  loading="lazy"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <ServiceBeforeAfter
+          items={[
+            {
+              beforeSrc: "/images/ba-photofacial-pigmentation-before.jpg",
+              afterSrc: "/images/ba-photofacial-pigmentation-after.jpg",
+              beforeAlt: "Skin before BBL Photofacial treatment",
+              afterAlt: "Skin after BBL Photofacial treatment",
+            },
+          ]}
+        />
 
         <Testimonials showCTAs={false} />
         <BookingCTA />

@@ -14,7 +14,7 @@ const services = [
     description:
       "All facial treatments are customized to each client's needs from the Acne Eliminator to Microdermabrasion to everything in between we offer an array of services to hydrate, calm and clarify your skin.",
     tags: ["Deep Cleanse", "Hydration", "Acne Care", "Microdermabrasion"],
-    image: "/images/service-facial.jpg",
+    image: "/images/service-facial-mask.jpg",
     alt: "Professional facial treatment with gentle skincare application",
     href: "/services/facial-treatments",
     bookUrl: SQUARE_FACIAL_BOOKING_URL,
@@ -36,7 +36,7 @@ const services = [
     description:
       "Broadband Light (BBL) is an advanced cosmetic skin treatment that offers skin rejuvenation, lightens brown spots and removes vascular redness from the skin making it a great treatment for rosacea skin.",
     tags: ["Brown Spots", "Rosacea", "Sun Damage", "Rejuvenation"],
-    image: "/images/service-bbl.jpg",
+    image: "/images/service-photofacial-ipl.jpg",
     alt: "Professional BBL Photofacial treatment in progress",
     href: "/services/photo-facial",
     bookUrl: SQUARE_BOOKING_URL,

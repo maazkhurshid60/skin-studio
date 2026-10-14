@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import Testimonials from "@/components/Testimonials";
 import BookingCTA from "@/components/BookingCTA";
+import ServiceBeforeAfter from "@/components/ServiceBeforeAfter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -193,6 +194,17 @@ export default function LashServicesPage() {
         </section>
 
         {/* Treatment Service Boxes */}
+        <ServiceBeforeAfter
+          items={[
+            {
+              beforeSrc: "/images/ba-eye-lift-before.jpg",
+              afterSrc: "/images/ba-eye-lift-after.jpg",
+              beforeAlt: "Eye area before treatment",
+              afterAlt: "Eye area after treatment",
+            },
+          ]}
+        />
+
         <section className="border-t border-border-subtle bg-dark-primary py-24 md:py-32">
           <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
             <div className="mb-14 text-center">
